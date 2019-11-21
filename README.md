@@ -5,6 +5,6 @@ Group members:
 Alexandra Willi, Aron Dalle Pezze, Nicolò Panciera
 
 active:
--
+- Alexandra Willi
 -
 -
