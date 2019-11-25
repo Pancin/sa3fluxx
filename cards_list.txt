@@ -74,7 +74,7 @@ Actions (20 cards)
     Steal Something [Steal one Keeper or one Creeper from another player]
     Mix It All Up [Take everyone's cards on the table (yours included), mix them and redistribute them starting from you]
 
-New Rules (22 cards):
+New Rules (21 cards):
     Draw 2
     Draw 3
     Draw 4
@@ -94,13 +94,12 @@ New Rules (22 cards):
     No-Hand Bonus 
     Poor Bonus
     Rich Bonus
-    Inflation
     Silver Lining
 
-Total cards: 90
+Total cards: 89
 
 
-Additional Card (11 cards; 1 Keeper, 1 Creeper, 3 Goals, 2 Actions, 4 Rules):
+Additional Card (12 cards; 1 Keeper, 1 Creeper, 3 Goals, 2 Actions, 5 Rules):
     KEEPER: Party
     CREEPER: Radioactive Potato [Each time the Goal changes, move this card in counter-turn direction]
     GOAL: 10 Cards in Hand 
@@ -112,6 +111,7 @@ Additional Card (11 cards; 1 Keeper, 1 Creeper, 3 Goals, 2 Actions, 4 Rules):
     RULE: You Also Need a Potato [If the Radioactive Potato is on the table, you must have it in order to win]
     RULE: Double Agenda [There can be 2 Goals; when adding a new one, you decided which on the previous two you want to discard]
     RULE: Get On With It! [At any time before your final play, you may discard all the cards you have left in your hands and end your turn. Then, draw 3 cards.]
+    RULE: Inflation
 
 Addtional Rules:
     -Each time the deck ends, increasing the base number of draws and plays by 1
