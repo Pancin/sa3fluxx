@@ -1,0 +1,16 @@
+Atlas connection string:
+mongodb+srv://pancindb:<password>@sacluster0-urngm.azure.mongodb.net/test?retryWrites=true&w=majority
+
+models:
+-game state
+-player
+--hand
+--keepers
+--creepers
+--various flags
+-cards
+--name
+--type
+--effect
+--description
+-deck
