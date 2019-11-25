@@ -31,7 +31,7 @@ Goals (27 cards):
     Bed Time [Time + Sleep]
     Brain (no TV) [Brain and no Television ON THE TABLE]
     Chocolate Cookies [Chocolate + Cookies]
-    Chocolate Milk [Chocolate + Milk}]
+    Chocolate Milk [Chocolate + Milk]
     Death by Chocolate [Death + Cholocate]
     Dreamland [Dreams + Sleep]
     Hearts and Minds [Love and Brain]
@@ -116,3 +116,9 @@ Additional Card (12 cards; 1 Keeper, 1 Creeper, 3 Goals, 2 Actions, 5 Rules):
 Addtional Rules:
     -Each time the deck ends, increasing the base number of draws and plays by 1
     -Play without Creepers and Creepers-related cards
+
+
+
+
+Maximum Keepers on-table for a single player: 18 (two rows of 9)
+Max Rules: 10 (1-1 draw and play + 2 rows of 4)
