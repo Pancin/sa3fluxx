@@ -7,4 +7,4 @@ Alexandra Willi, Aron Dalle Pezze, Nicolò Panciera
 active:
 - Alexandra Willi
 - Aron Dalle Pezze
-- Nicolò Pancira
+- Nicolò Panciera
