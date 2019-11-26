@@ -14,8 +14,9 @@ const GameSchema = new mongoose.Schema(
         rules: { type: Array, default: [] },
         goal: {}, // definition required
         discard: { type: Array, default: [] },
-        War: { type: Boolean, default: false }, //flag for goal
-        TV: { type: Boolean, default: false } //flag for goal
+        war: { type: Boolean, default: false }, //flag for goal
+        tv: { type: Boolean, default: false }, //flag for goal
+        inflation: { type: Boolean, default: false }
     }
 );
 

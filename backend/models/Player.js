@@ -11,7 +11,7 @@ const PlayerSchema = new mongoose.Schema(
         hand: { type: Array, default: [] },
         keepers: { type: Array, default: [] },
         creepers: { type: Array, default: [] },
-        canWin: { type: Boolean, default: true }
+        canWin: { type: Boolean, default: false } // not sure if useful
     }
 );
 
