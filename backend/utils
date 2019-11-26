@@ -14,3 +14,5 @@ models:
 --effect
 --description
 -deck
+
+cards and deck db_model or just a json?
