@@ -1,0 +1,17 @@
+/** @constructor
+* @augments CardSchemaInstance
+* @param {Object} definition
+*/
+const mongoose = require('mongoose');
+const CardSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true },
+        dataURL: { type: String, required: true },
+        description: { type: String},
+        type: { type: String, required: true }
+    }
+);
+
+mongoose.model('Favorites', CardSchema);
+
+module.exports = CardSchema;
