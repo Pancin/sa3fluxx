@@ -1,26 +1,33 @@
+/* DIMENSIONS */
+img {
+    height: 100px;
+    margin: 5px;
+}
+body {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+
+/* FLEX, MARGINS AND HEIGHTS */
 html {
     min-height: 100%;
     height: 100%;
 }
-
 body{
     margin: 0%;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     align-content: stretch;
     min-height: 100%;
 }
-
 #left {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     flex-basis: 10%;
 }
 #center {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     flex-basis: 80%;
 }
@@ -34,47 +41,59 @@ body{
     flex-wrap: wrap;
     flex-direction: column;
     flex-basis: 21%;
+    justify-content: space-evenly;
 }
 #log {
     flex-basis: 79%;
 }
 #game {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    flex-basis: 88%;
+    flex-basis: 86%;
 }
 #gameLeft {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    flex-basis: 30%;
+    flex-basis: 20%;
+    justify-content: center;
 }
 #leftCards {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
 }
 #leftCC {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
+    width: 100px;
 }
 #leftCreepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 77.5px;
+    height: 330px;
 }
 #leftKeepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    height: 550px;
+    width: 155px;
+    justify-content: center;
 }
 #gameCenter {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    flex-basis: 40%;
+    flex-basis: 60%;
+    justify-content: center;
 }
 #top {
     display: flex;
@@ -83,33 +102,43 @@ body{
 }
 #topCC {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
 }
 #topCreepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    height: 110px;
 }
 #topKeepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    height: 110px;
 }
 #middle {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 #ddg {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    height: 110px;
 }
 #rules {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    height: 110px;
 }
 #bottom {
     display: flex;
@@ -120,48 +149,70 @@ body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    height: 110px;
 }
 #bottomCC {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-evenly;
+    height: 110px;
 }
 #bottomCreepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+}
+#bottomName, #playsLeft {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.5%;
 }
 #gameRight {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    flex-basis: 30%;
+    flex-basis: 20%;
+    justify-content: center;
 }
 #rightCards {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
 }
 #rightKeepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    height: 550px;
+    width: 155px;
+    justify-content: center;
 }
 #rightCC {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
+    width: 100px;
 }
 #rightCreepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 77.5px;
+    height: 330px;
 }
 #hand {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    flex-basis: 12%;
+    flex-basis: 14%;
+    justify-content: space-between;
 }
 #handCards {
     display: flex;
@@ -171,15 +222,42 @@ body{
 #chat {
     flex-basis: 100%;
 }
+#void {
+    padding-left: 50px;
+}
+#leftName, #rightName, #leftCardsN, #rightCardsN{
+    padding: 1%;
+    padding-bottom: 0%;
+}
+#topCardsN {
+    display: flex;
+    align-items: center;
+    height: 110px;
+    margin-right: 2%;
+}
+#bRight, #bLeft {
+    display: flex;
+    align-items: center;
+    padding: 2%;
+}
 
 /* TEMPORARY COLORS */
+body {
+    background-color: ivory;
+}
+#hand {
+    background-color: lightblue;
+}
 #sidenav {
     background-color: coral;
 }
 #log {
-    background-color: aquamarine;
+    background-color: pink;
 }
-#gameLeft {
+#chat {
+    background-color: yellowgreen;
+}
+/* #gameLeft {
     background-color: red;
 }
 #gameRight {
@@ -196,6 +274,9 @@ body{
 }
 #bottom {
     background-color: green;
+}
+#bottomName {
+    background-color: blue;
 }
 #leftName {
     background-color: brown;
@@ -210,14 +291,14 @@ body{
     background-color: orange;
 }
 #leftCreepers {
-    background-color: black;
+    background-color: green;
     color: white;
 }
 #leftKeepers {
     background-color: blueviolet;
 }
 #topName {
-    background-color: yellow;
+    background-color: blue;
 }
 #topCC {
     background-color: violet;
@@ -226,7 +307,7 @@ body{
     background-color: brown;
 }
 #topCreepers {
-    background-color: black;
+    background-color: green;
     color: white;
 }
 #topKeepers {
@@ -258,7 +339,7 @@ body{
     background-color: purple;
 }
 #bottomCreepers {
-    background-color: black;
+    background-color: green;
     color: white;
 }
 #playsLeft {
@@ -277,14 +358,11 @@ body{
     background-color: yellow;
 }
 #rightCreepers {
-    background-color: black;
+    background-color: green;
     color: white;
 }
 #rightCardsN {
     background-color: orange;
-}
-#hand {
-    background-color: black;
 }
 #bLeft {
     background-color: grey;
@@ -294,7 +372,4 @@ body{
 }
 #handCards {
     background-color: yellow;
-}
-#chat {
-    background-color: yellowgreen;
-}
+} */
