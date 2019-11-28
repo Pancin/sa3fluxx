@@ -1,0 +1,3 @@
+this folder should contain all public app and fetch related .js files
+
+such as fetch, app, handlers
