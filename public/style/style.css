@@ -1,7 +1,176 @@
-body{
-    margin: 0%;
+html {
+    min-height: 100%;
+    height: 100%;
 }
 
+body{
+    margin: 0%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: stretch;
+    min-height: 100%;
+}
+
+#left {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 10%;
+}
+#center {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 80%;
+}
+#right {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 10%;
+}
+#sidenav {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 21%;
+}
+#log {
+    flex-basis: 79%;
+}
+#game {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 88%;
+}
+#gameLeft {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 30%;
+}
+#leftCards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#leftCC {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#leftCreepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#leftKeepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#gameCenter {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 40%;
+}
+#top {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#topCC {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#topCreepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#topKeepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#middle {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#ddg {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#rules {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#bottom {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#bottomKeepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#bottomCC {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#bottomCreepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#gameRight {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 30%;
+}
+#rightCards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#rightKeepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#rightCC {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#rightCreepers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#hand {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 12%;
+}
+#handCards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#chat {
+    flex-basis: 100%;
+}
 
 /* TEMPORARY COLORS */
 #sidenav {
@@ -10,11 +179,14 @@ body{
 #log {
     background-color: aquamarine;
 }
-#gameleft {
+#gameLeft {
     background-color: red;
 }
 #gameRight {
     background-color: red;
+}
+#gameCenter {
+    background-color: yellow;
 }
 #top {
     background-color: green;
@@ -39,6 +211,7 @@ body{
 }
 #leftCreepers {
     background-color: black;
+    color: white;
 }
 #leftKeepers {
     background-color: blueviolet;
@@ -54,6 +227,7 @@ body{
 }
 #topCreepers {
     background-color: black;
+    color: white;
 }
 #topKeepers {
     background-color: red;
@@ -63,6 +237,7 @@ body{
 }
 #discard {
     background-color: black;
+    color: white;
 }
 #deck {
     background-color: red;
@@ -84,6 +259,7 @@ body{
 }
 #bottomCreepers {
     background-color: black;
+    color: white;
 }
 #playsLeft {
     background-color: blue;
@@ -102,6 +278,7 @@ body{
 }
 #rightCreepers {
     background-color: black;
+    color: white;
 }
 #rightCardsN {
     background-color: orange;
@@ -120,25 +297,4 @@ body{
 }
 #chat {
     background-color: yellowgreen;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
-}
-#log {
-    background-color: aquamarine;
 }
