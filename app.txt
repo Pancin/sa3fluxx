@@ -1,0 +1,18 @@
+app functionalities
+
+local
+	show discard pile
+	show rules
+	show everybody's keepers&creepers
+	zoom cards / read description / alternatives
+	browse game log
+
+	draw cards? math.random in locale?
+
+local with server calls
+	play cards
+		-change rules
+		-change keepers/creepers
+		-actions (after action is completed?)
+	rotazione turni
+	compute win condition -> if game ends update other
