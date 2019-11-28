@@ -122,3 +122,4 @@ Addtional Rules:
 
 Maximum Keepers on-table for a single player: 18 (two rows of 9)
 Max Rules: 10 (1-1 draw and play + 2 rows of 4)
+
