@@ -4,8 +4,13 @@ img {
     margin: 5px;
 }
 body {
-    font-size: 1.5em;
     text-align: center;
+    font-size: 26px;
+    /* min-height = 820px */
+}
+
+img.arrow{
+    height: 86px;
 }
 
 
@@ -49,7 +54,7 @@ body{
 #game {
     display: flex;
     flex-direction: row;
-    flex-basis: 86%;
+    flex-basis: 88%;
 }
 #gameLeft {
     display: flex;
@@ -87,6 +92,7 @@ body{
     height: 550px;
     width: 155px;
     justify-content: center;
+    align-items: flex-start;
 }
 #gameCenter {
     display: flex;
@@ -99,11 +105,13 @@ body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
 }
 #topCC {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-self: center;
 }
 #topCreepers {
     display: flex;
@@ -111,46 +119,59 @@ body{
     flex-direction: row;
     justify-content: center;
     height: 110px;
+    width: 232.5px;
 }
 #topKeepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    align-self: center;
     height: 110px;
+    width: 697.5px;
 }
 #middle {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
 }
 #ddg {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    align-self: center;
     height: 110px;
+}
+#draw, #play, #discard, #deck, #goal {
+    height: 110px;
+    width: 77.5px;
 }
 #rules {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    align-self: center;
     height: 110px;
+    width: 620px;
 }
 #bottom {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
 }
 #bottomKeepers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    align-self: center;
     height: 110px;
+    width: 697.5px;
 }
 #bottomCC {
     display: flex;
@@ -164,11 +185,15 @@ body{
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    height: 110px;
+    width: 232.5px;
 }
 #bottomName, #playsLeft {
     display: flex;
     align-items: flex-end;
     padding-bottom: 0.5%;
+    width: 200px;
+    justify-content: center;
 }
 #gameRight {
     display: flex;
@@ -185,11 +210,12 @@ body{
 }
 #rightKeepers {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     flex-direction: column;
     height: 550px;
     width: 155px;
     justify-content: center;
+    align-items: flex-start;
 }
 #rightCC {
     display: flex;
@@ -211,23 +237,27 @@ body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    flex-basis: 14%;
+    flex-basis: 12%;
     justify-content: space-between;
 }
 #handCards {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-content: center; 
 }
 #chat {
     flex-basis: 100%;
 }
 #void {
-    padding-left: 50px;
+    padding-left: 25px;
 }
 #leftName, #rightName, #leftCardsN, #rightCardsN{
     padding: 1%;
     padding-bottom: 0%;
+}
+#leftName, #rightName {
+    margin-bottom: 2%;
 }
 #topCardsN {
     display: flex;
@@ -235,10 +265,83 @@ body{
     height: 110px;
     margin-right: 2%;
 }
+#leftCardsN, #topCardsN, #rightCardsN, #bottomCardsN {
+    font-size: 22px;
+}
+#bottomName, #playsLeft {
+    width: 150px;
+}
 #bRight, #bLeft {
     display: flex;
     align-items: center;
-    padding: 2%;
+}
+
+/* LITTLE RESSPONSITIVITY */
+@media (max-width: 1600px){
+    body {
+        min-width: 1280px;
+        overflow: scroll;
+        font-size: 22px;
+    }
+    img {
+        height: 80px;
+        margin: 3px;
+    }
+    #topCardsN {
+        height: 86px;
+    }
+    #leftCC {
+        width: 80px;
+    }
+    #leftCreepers {
+        width: 61.5px;
+        height: 258px;
+    }
+    #leftKeepers {
+        height: 430px;
+        width: 123px;
+    }
+    #topCreepers {
+        height: 86px;
+        width: 184.5px;
+    }
+    #topKeepers {
+        height: 86px;
+        width: 540px;
+    }
+    #ddg {
+        height: 86px;
+    }
+    #draw, #play {
+        height: 86px;
+        width: 61.5px;
+    }
+    #rules {
+        height: 86px;
+        width: 480px;
+    }
+    #bottomKeepers {
+        height: 86px;
+        width: 540px;
+    }
+    #rightCC {
+        width: 80px;
+    }
+    #rightCreepers {
+        width: 61.5px;
+        height: 258px;
+    }
+    #rightKeepers {
+        height: 430px;
+        width: 123px;
+    }
+    #middle {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+    #leftCardsN, #topCardsN, #rightCardsN, #bottomCardsN {
+        font-size: 18px;
+    }
 }
 
 /* TEMPORARY COLORS */
@@ -257,6 +360,55 @@ body {
 #chat {
     background-color: yellowgreen;
 }
+#leftCreepers, #topCreepers, #rightCreepers, #bottomCreepers{
+    background-color: rgba(85, 85, 85, 0.2);
+}
+#leftKeepers, #topKeepers, #rightKeepers, #bottomKeepers{
+    background-color: rgba(30, 255, 0, 0.2);
+}
+#draw, #play, #rules{
+    background-color: rgba(255, 251, 0, 0.2);
+}
+#discard, #deck{
+    background-color: rgba(0, 81, 255, 0.2);
+}
+#goal{
+    background-color: rgba(255, 0, 200, 0.2);
+}
+/* #bLeft {
+    background-color: grey;
+}
+#bRight {
+    background-color: grey;
+}
+#handCards {
+    background-color: yellow;
+} */
+/* #bottom {
+    background-color: green;
+}
+#bottomKeepers {
+    background-color: red;
+}
+#bottomCC {
+    background-color: grey;
+}
+#bottomName {
+    background-color: blue;
+}
+#playsLeft {
+    background-color: purple;
+}
+#bottomCreepers {
+    background-color: green;
+    color: white;
+} */
+/* #topKeepers {
+    background-color: red;
+}
+#top {
+    background-color: green;
+} */
 /* #gameLeft {
     background-color: red;
 }
@@ -266,16 +418,7 @@ body {
 #gameCenter {
     background-color: yellow;
 }
-#top {
-    background-color: green;
-}
 #middle {
-    background-color: blue;
-}
-#bottom {
-    background-color: green;
-}
-#bottomName {
     background-color: blue;
 }
 #leftName {
@@ -310,9 +453,6 @@ body {
     background-color: green;
     color: white;
 }
-#topKeepers {
-    background-color: red;
-}
 #ddg {
     background-color: chartreuse;
 }
@@ -328,19 +468,6 @@ body {
 }
 #rules {
     background-color: blueviolet;
-}
-#bottomKeepers {
-    background-color: red;
-}
-#bottomCC {
-    background-color: grey;
-}
-#bottomCardsN {
-    background-color: purple;
-}
-#bottomCreepers {
-    background-color: green;
-    color: white;
 }
 #playsLeft {
     background-color: blue;
@@ -363,13 +490,4 @@ body {
 }
 #rightCardsN {
     background-color: orange;
-}
-#bLeft {
-    background-color: grey;
-}
-#bRight {
-    background-color: grey;
-}
-#handCards {
-    background-color: yellow;
 } */
