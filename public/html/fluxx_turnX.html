@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="author" content="Aron Dalle Pezze, Fluxx Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fluxx - Game</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style/style.css" />
+    <!-- <link rel="icon" href="../media/img/icon.png"> -->
+</head>
+
+<body>
+    <div id="left"> <!-- column | -->
+        <div id="sidenav">
+            <div>Homepage</div>
+            <div>Info</div>
+            <div>Play</div>
+        </div> <!-- row - -->
+        <div id="log">
+            Carcarlo's turn
+            <br>
+            <br>
+            Carcarlo played Death
+            <br>
+            <br>
+            Carcarlo played Play All
+            <br>
+            <br>
+            Carcarlo played No-Hand Bonus
+            <br>
+            <br>
+            Carcarlo played Rich Bonus
+            <br>
+            <br>
+            Carcarlo played Poor Bonus
+            <br>
+            <br>
+            Carcarlo played Silver Lining
+            <br>
+            <br>
+            Carcarlo played First Play Random
+            <br>
+            <br>
+            Carcarlo played Last Play Random
+            <br>
+            <br>
+            Carcarlo played Draw 4
+            <br>
+            <br>
+            Carcarlo played Use What You Take
+            <br>
+            <br>
+            Carcarlo played Simplify
+            <br>
+            <br>
+            Locomotanya's turn
+            <br>
+            <br>
+        </div>
+    </div>
+
+
+    <div id="center"> <!-- column | -->
+        <div id="game"> <!-- row - -->
+            <div id="gameLeft"> <!-- column | -->
+                <div id="leftName">Carcarlo</div>
+                <div id="leftCards"> <!-- row - -->
+                    <div id="leftCC"> <!-- column | -->
+                        <div id="leftCardsN">Cards: 0</div>
+                        <div id="leftCreepers">
+                            <img src="../../cards/deck/creepers/Death.png">
+                            <img src="../../cards/deck/creepers/Taxes.png">
+                        </div> <!-- column | -->
+                    </div>
+                    <div id="leftKeepers">
+                        <img src="../../cards/deck/keepers/time.png">
+                        <img src="../../cards/deck/keepers/toaster.png">
+                        <img src="../../cards/deck/keepers/dreams.png">
+                    </div> <!-- column | --> <!-- MAX 10 normal view -->
+                </div>
+            </div>
+
+
+            <div id="gameCenter"> <!-- column | -->
+                <div id="top"> <!-- column | -->
+                    <div id="topName">Cataclismio</div>
+                    <div id="topCC"> <!-- row - -->
+                        <div id="topCardsN">Cards: 2</div>
+                        <div id="topCreepers"><img src="../../cards/deck/creepers/war.png"></div> <!-- row - -->
+                    </div>
+                    <div id="topKeepers">
+                        <img src="../../cards/deck/keepers/peace.png">
+                        <img src="../../cards/deck/keepers/sun.png">
+                        <img src="../../cards/deck/keepers/sleep.png">
+                        <img src="../../cards/deck/keepers/tv.png">
+                    </div> <!-- row - --> <!-- MAX 9 normal view -->
+                </div>
+
+                <div id="middle"> <!-- column | -->
+                    <div id="ddg"> <!-- row - -->
+                        <div id="draw"><img src="../../cards/deck/newRules/draw4.png"></div>
+                        <div id="play"><img src="../../cards/deck/newRules/playAll.png"></div>
+                        <div id="void"></div>
+                        <div id="discard"><img src="../../cards/deck/actions/simplify.png"></div>
+                        <div id="deckimg">
+                            <img src="../media/img/deck.png">
+                            <div id="deck">21</div>
+                        </div>
+                        <div id="void"></div>
+                        <div id="goal"><img src="../../cards/deck/goals/allLove.png"></div>
+                        <div id="void"></div>
+                    </div>
+                    <div id="rules">
+                        <img src="../../cards/deck/newRules/hLimit2.png">
+                        <img src="../../cards/deck/newRules/FpRandom.png">
+                        <img src="../../cards/deck/newRules/LpRandom.png">
+                        <img src="../../cards/deck/newRules/nhBonus.png">
+                        <img src="../../cards/deck/newRules/pBonus.png">
+                        <img src="../../cards/deck/newRules/rBonus.png">
+                        <img src="../../cards/deck/newRules/sLining.png">
+                    </div><!-- row - --> <!-- MAX 8 -->
+                </div>
+
+                <div id="bottom"> <!-- column | -->
+                    <div id="bottomKeepers">
+                        <img src="../../cards/deck/keepers/love.png">
+                        <img src="../../cards/deck/keepers/money.png">
+                    </div> <!-- row - --> <!-- MAX 9 normal view -->
+                    <div id="bottomCC"> <!-- row - -->
+                        <div id="bottomName">Locomotanya</div>
+                        <div id="bottomCreepers"></div> <!-- row - -->
+                        <div id="playsLeft">Plays left: -</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="gameRight"> <!-- column | -->
+                <div id="rightName">Termosimone</div>
+                <div id="rightCards"> <!-- row - -->
+                    <div id="rightKeepers">
+                        <img src="../../cards/deck/keepers/brain.png">
+                        <img src="../../cards/deck/keepers/bread.png">
+                        <img src="../../cards/deck/keepers/chocolate.png">
+                        <img src="../../cards/deck/keepers/cookie.png">
+                        <img src="../../cards/deck/keepers/cosmos.png">
+                        <img src="../../cards/deck/keepers/eye.png">
+                        <img src="../../cards/deck/keepers/milk.png">
+                        <img src="../../cards/deck/keepers/moon.png">
+                    </div> <!-- column | --> <!-- MAX 10 normal view -->
+                    <div id="rightCC"> <!-- column | -->
+                        <div id="rightCardsN">Cards: 2</div>
+                        <div id="rightCreepers"></div> <!-- column | -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="hand"> <!-- row - -->
+            <div id="bLeft"><img src="../media/img/leftArrow.png" class="arrow"></div>
+            <div id="handCards">
+                <img src="../../cards/deck/actions/creepSweep.png">
+                <img src="../../cards/deck/actions/jackpot.png">
+                <img src="../../cards/deck/newRules/kLimit4.png">
+                <img src="../../cards/deck/actions/noLimits.png">
+                <img src="../../cards/deck/goals/appliances.png">
+                <img src="../../cards/deck/goals/chocMilk.png">
+            </div> <!-- row - --> <!-- MAX 15 -->
+            <div id="bRight"><img src="../media/img/rightArrow.png" class="arrow"></div>
+        </div> 
+    </div>
+
+
+    <div id="right">
+        <div id="chat"></div>
+    </div>
+</body>
+
+</html>

@@ -55,6 +55,7 @@ body{
     flex-wrap: wrap;
     flex-direction: column;
     flex-basis: 21%;
+    min-height: 21%;
     justify-content: space-evenly;
 }
 #log {
