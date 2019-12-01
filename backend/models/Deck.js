@@ -5,8 +5,8 @@
 const mongoose = require('mongoose');
 const DeckSchema = new mongoose.Schema(
     {
-        cards: { type: Array, default: [] },
         size: { type: Number, required: true },
+        cards: { type: Array, default: [] },
     }
 );
 
