@@ -43,13 +43,17 @@ class Game extends React.Component {
 				<OtherPlayerLeft 
 					player={this.state.otherPlayer[3]}
 				/>
-				<OtherPlayerTop 
-					player={this.state.otherPlayer[2]}
-				/>
-				<Middle /> 
-				<Player
-					player={this.state.otherPlayer[0]}
-				/>
+				<div id="gameCenter">
+					<OtherPlayerTop 
+						player={this.state.otherPlayer[2]}
+					/>
+					<Middle 
+						boh={this.state.boh}
+					/> 
+					<Player
+						player={this.state.otherPlayer[0]}
+					/>
+				</div>
 				<OtherPlayerRight 
 					player={this.state.otherPlayer[1]}
 				/>

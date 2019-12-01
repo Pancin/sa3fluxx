@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-class OtherPlayer extends React.Component {
+class OtherPlayerLeft extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: 'Stronzolo',
+			name: 'Olofausto',
 			id: 0,
 		}
 	}
@@ -17,24 +17,19 @@ class OtherPlayer extends React.Component {
 	render() {
 
 		return (
-			<React.Fragment>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-			</React.Fragment>
-
+			<div id="gameLeft" className="playerLeft"> 
+                <div id="leftName">Olofausto</div>
+                <div id="leftCards">
+                    <div id="leftCC">
+                        <div id="leftCardsN">Cards: 0</div>
+                        <div id="leftCreepers"></div>
+                    </div>
+                    <div id="leftKeepers"></div>
+                </div>
+            </div>
 		);
 	}
 }
 
 
-export default OtherPlayer;
+export default OtherPlayerLeft;
