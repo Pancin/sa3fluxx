@@ -13,7 +13,7 @@ app.use(bodyParser.text())
 //search in public
 app.use(express.static(path.join(__dirname, 'public')));
 
-//cponfigure routers
+//configure routers
 const routers = require('./routes/routers');
 app.use('/', routers.root);
 
