@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-class OtherPlayer extends React.Component {
+class Hand extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: 'Stronzolo',
-			id: 0,
+			hand: {},
 		}
 	}
 
@@ -17,24 +16,14 @@ class OtherPlayer extends React.Component {
 	render() {
 
 		return (
-			<React.Fragment>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-			</React.Fragment>
-
+            <div className="Hand" id="hand">
+                <div id="bLeft"><img src="../media/img/leftArrow.png" class="arrow"></img></div>
+                <div id="handCards"></div>
+                <div id="bRight"><img src="../media/img/rightArrow.png" class="arrow"></img></div>
+            </div> 
 		);
 	}
 }
 
 
-export default OtherPlayer;
+export default Hand;

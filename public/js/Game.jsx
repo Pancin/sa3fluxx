@@ -34,7 +34,7 @@ class Game extends React.Component {
 		}
 	}
 
-
+	//axios require
 
 	render() {
 
@@ -48,7 +48,7 @@ class Game extends React.Component {
 						player={this.state.otherPlayer[2]}
 					/>
 					<Middle 
-						boh={this.state.boh}
+						boh={this.state.boh}  //useful?
 					/> 
 					<Player
 						player={this.state.otherPlayer[0]}

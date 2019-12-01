@@ -10,22 +10,22 @@ class Center extends React.Component {
 			activePlayer: 0,
 			players: [
 				{
-					name: 'Stronzolo',
+					name: 'Locomotanya',
 					id: 0,
 					isPlayer: true,
 				},
 				{
-					name: 'Cataclismio',
+					name: 'Termosimone',
 					id: 1,
 					isPlayer: false,
 				},
 				{
-					name: 'Antanio',
+					name: 'Cataclismio',
 					id: 2,
 					isPlayer: false,
 				},
 				{
-					name: 'Supercazzola',
+					name: 'Olofausto',
 					id: 3,
 					isPlayer: false,
 				}

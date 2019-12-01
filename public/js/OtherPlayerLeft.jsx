@@ -7,12 +7,13 @@ class OtherPlayerLeft extends React.Component {
 		super(props);
 		this.state = {
 			name: 'Olofausto',
-			id: 0,
+			hand: {},
+			creepers: {},
+			keepers: {},
 		}
 	}
 
-
-
+	//axios require
 
 	render() {
 

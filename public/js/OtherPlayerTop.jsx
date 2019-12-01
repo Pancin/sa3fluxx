@@ -1,40 +1,34 @@
 import React from 'react';
 import axios from 'axios';
 
-class OtherPlayer extends React.Component {
+class OtherPlayerTop extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: 'Stronzolo',
-			id: 0,
+			name: 'Cataclismio',
+			hand: {},
+			creepers: {},
+			keepers: {},
 		}
 	}
 
-
-
+	//axios require
 
 	render() {
 
 		return (
-			<React.Fragment>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
+			<div id="top" className="playerTop">
+				<div id="topName">Cataclismio</div>
+				<div id="topCC">
+					<div id="topCardsN">Cards: 0</div>
+					<div id="topCreepers"></div> 
 				</div>
-				<div className="OtherPlayer">
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-			</React.Fragment>
-
+				<div id="topKeepers"></div>
+			</div>
 		);
 	}
 }
 
 
-export default OtherPlayer;
+export default OtherPlayerTop;
