@@ -38,9 +38,15 @@ class Center extends React.Component {
 			rules: [],
 			goal: {},
 			discard: [],
+
+			cardToZoom: null,
 		}
 
 
+	}
+
+	changeZoomCard = function (card) {
+		this.setState({cardToZoom: card});
 	}
 
 
@@ -48,8 +54,15 @@ class Center extends React.Component {
 	render() {
 		return (
 			<div className="Center" id="center">
-				<Game />
-				<Hand />
+				<ZoomedCard 
+					cardToZoom = {this.state.cardToZoom}
+				/>
+				<Game 
+					changeZoomCard={this.changeZoomCard}
+				/>
+				<Hand 
+					changeZoomCard={this.changeZoomCard}
+				/>
       		</div>
 		);
 	}

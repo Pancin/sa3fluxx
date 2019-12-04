@@ -10,8 +10,7 @@ class Hand extends React.Component {
 		}
 	}
 
-
-
+	// event listener for cards that call function this.props.changeZoomCard(card)
 
 	render() {
 

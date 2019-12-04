@@ -23,7 +23,7 @@ img.arrow{
 
 
 /* IMG HOVER */
-img:hover {
+/* img:hover {
     position: absolute;
     left: 0%;
     top: 0%;
@@ -41,7 +41,7 @@ img:hover {
 }
 img.arrow:hover {
     height: 86px;
-}
+} */
 
 
 /* FLEX, MARGINS AND HEIGHTS */
