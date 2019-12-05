@@ -1,7 +1,12 @@
 // General variables
 var hand = true;
 var field = 0;
-var player = false;
+var selectPlayer = false;
+var firstSelection;
+var secondPlayer;
+var activePlayer;
+var rmRules = false;
+var special = "";
 
 
 // Document elements
@@ -30,18 +35,57 @@ bottomPlayer.addEventListener("click", () => selectedPlayer(bottomPlayer));
 
 // Functions
 function selectedGameCard(clicked) {
-    if (clicked.outerHTML != '<img src="../media/img/deck.png">') { //so that it doesn't work on deck
+    let isPlaying;
+    // GET: PLAYER ISPLAYING (NAME)
+    let cardType;
+    // GET: CARD TYPE (URL)
+
+    if (clicked.outerHTML != '<img src="../media/img/deck.png">' && isPlaying) { //so that it doesn't work on deck
         if (field > 0) {
-            // ??
+            if (rmRules) {
+                // REMOVE: RULE (URL) FROM GAME STATE AND PUT IT IN DISCARD PILE
+                field--;
+            }
+            else if (special == "exchange") {
+                if (cardType == "Keeper" && firstSelection != "") {
+                    firstSelection = clicked.innerHTML;
+                    // GET: NAME OF PLAYER WHO HAS THAT KEEPER (URL)
+                    field--;
+                }
+                else if (cardType == "Keeper") { // && ...?
+                    // REMOVE: CARD (URL) FROM PLAYER (NAME)
+                    // REMOVE: CARD (URL) FROM PLAYER (NAME)
+                    // PUT: CARD (URL) IN KEEPERS OF PLAYER (NAME)
+                    // PUT: CARD (URL) IN KEEPERS OF PLAYER (NAME)
+                }
+            }
+            else if (special == "trash") {
+                if (cardType == "Keeper" || cardType == "Creeper") {
+                    // REMOVE: CARD (URL) FROM PLAYER WHO HAS IT AND PUT IT IN THE PILE OF DISCARDS
+                    field--;
+                }
+            }
+            else if (special == "steal") {
+                if (cardType == "Keeper") {
+                    // REMOVE: CARD (URL) FROM PLAYER WHO HAS IT IN THE KEEPERS
+                    // PUT: CARD (URL) TO PLAYER (NAME)
+                    field--;
+                }
+            }
         }
-        else {
-            console.log("Error");
+        if (field == 0) {
+            rmRules = false;
+            special = "";
+            firstSelection = "";
+            secondPlayer = "";
+            finishPlay();
         }
     }
 }
 
 function selectedHandCard(clicked) {
-    //check plays-left
+    let isPlaying;
+    // GET: PLAYER ISPLAYING (NAME)
 
     if (clicked.outerHTML == '<img src="../media/img/leftArrow.png" class="arrow">') {
         shift(true); //left
@@ -49,8 +93,7 @@ function selectedHandCard(clicked) {
     else if (clicked.outerHTML == '<img src="../media/img/rightArrow.png" class="arrow">') {
         shift(false); //right
     }
-    else if (hand) {
-        hand = false;
+    else if (hand && isPlaying) {
         playCard(clicked);
         console.log("Card played");
     }
@@ -60,12 +103,28 @@ function selectedHandCard(clicked) {
 }
 
 function selectedPlayer(playerName) {
-    if (player) {
-        console.log(playerName.innerHTML);
-        player = false;
-    }
-    else {
-        console.log("test");
+    let isPlaying;
+    // GET: PLAYER ISPLAYING (NAME)
+    if (selectPlayer && isPlaying) {
+        if (special == "rotate") {
+            // WIP
+            selectPlayer = false;
+            finishPlay();
+        }
+        else if (special == "trade") {
+            let handCards;
+            // GET: PLAYER (NAME) HAND
+            // PUT: SUBSTITUTE PLAYER (NAME) HAND WITH RECEIVED ONE
+            // PUT: SUBSTITUTE PLAYER (NAME) HAND WITH RECEIVED ONE
+            selectPlayer = false;
+            finishPlay();
+        }
+        else if (special == "take and use") {
+            let handCards;
+            // GET: PLAYER (NAME) HAND
+            selectPlayer = false;
+            // Play randomly one of those cards
+        }
     }
 }
 
@@ -81,130 +140,151 @@ function shift(direction) { //true = left, false = right
 function playCard(card) {
     let cardName;
     let cardType;
-    //obtian Card Type
-    cardType = "Keeper";
-    // 
+    // GET: CARD NAME (URL)
+    // GET: CARD TYPE (URL OR NAME)
 
     if (cardType == "Keeper") {
-        // remove card from hand of player
-        // add card player keepers
-        // modify plays left on the game state
-
-        // await remove and add
-        // reduce plays left on the game state
+        // REMOVE: CARD (URL OR NAME) FROM PLAYER HAND (NAME)
+        // PUT: CARD (URL OR NAME) TO PLAYER KEEPERS (NAME)
+        // PUT: DECREASE PLAYS LEFT IN GAME STATE BY ONE
     }
     //Creepers can't be played by clicking on them
     else if (cardType == "newRule") {
-        // remove card from hand of player
-        // check rules on the game state
-        // await check
-        // if must overwrite a rule:
-        //      delete old rule from game state
-        // add new rule to game state
-        // add old rule card to discards
-
-        // await remove and add
-        // reduce plays left on the game state
+        // REMOVE: CARD (URL OR NAME) FROM PLAYER HAND (NAME)
+        // PUT: RULE (URL OR NAME) TO RULES IN GAME STATE (!! To check if a rul has to be overwritten and if so, add the old one to the discards pile)
+        // PUT: DECREASE PLAYS LEFT IN GAME STATE BY ONE
     }
     else if (cardType == "Goal") {
-        // remove card from hand of player
-        // add/substitute goal to game state
+        // REMOVE: CARD (URL OR NAME) FROM PLAYER HAND (NAME)
+        // PUT: GOAL (URL OR NAME) TO GOAL IN GAME STATE
+        // PUT: DECREASE PLAYS LEFT IN GAME STATE BY ONE
 
-        // await remove and add
-        // reduce plays left on the game state
     }
     else if (cardType == "Action") {
-        // remove card from hand of player
-        // obtain Card Name through image src
+        // REMOVE: CARD (URL OR NAME) FROM PLAYER HAND (NAME)
         actionCard(cardName);
-        // add card to discards
+        // PUT: CARD (URL OR NAME) TO DISCARDS PILE
     }
     else {
         console.log("error");
     }
 
-    if (!checkVictory()) {
-        hand = true;
-    }
-    else{
-        // dunno, display something cool
-    }
-    
-    // socket.io + ReactJS to update
+    checkVictory();
 }
 
 function actionCard(name) {
     if (cardName == "Jackpot") {
-        // draw three cards
-        // reduce plays left on the game state
+        // ???: ADD CARDS TO PLAYER (NAME) HAND.
+        finishPlay();
     }
     else if (cardName == "Discard and Draw") {
-        // counts the number of cards in your hand, then add them to discard pile and draw new ones
-        // reduce plays left on the game state
+        let handCards;
+        // GET: HAND FROM PLAYER
+        let cardsNumber;
+        // count cards in hand
+        // DISCARD ALL CARDS OF THAT PLAYER AND DRAW NEW ONES (WITH A GIVEN NUMBER OF DRAWS)
+        finishPlay();
     }
     else if (cardName == "Draw 2 and use 'em") {
-        //
+        // no ideas yet
     }
     else if (cardName == "Draw 3, Play 2 of them") {
-        //
+        // no ideas yet
     }
     else if (cardName == "Everybody Gets 1") {
-        //
+        // no ideas yet
     }
     else if (cardName == "Exchange Keepers") {
-        // select your keeper, then someone elses
         field = 2;
+        special = "exchange";
     }
     else if (cardName == "Let's Do That Again") {
         // opens the window of the discard pile and select one of them, I guess
     }
     else if (cardName == "Let's Simplify") {
-        //
+        let rules;
+        // GET: RULES FROM GAME STATE
+        let rulesNumber;
+        // count rules
+        field = rulesNumber/2;
+        rmRules = true;
     }
     else if (cardName == "No Limits") {
-        // removes all "limits" cards from rules in game state
-        // reduce plays left on the game state
+        // REMOVE: ALL LIMITS CARDS IN GAME STATE AND PUT THE IN THE DISCARD PILE
+        finishPlay();
     }
     else if (cardName == "Rotate Hands") {
-        //
+        selectPlayer = true;
+        special = "rotate";
     }
     else if (cardName == "Rules Reset") {
-        // cleans all rules in game state
-        // reduce plays left on the game state
+        // PUT: NULL IN RULES OF GAME STATE AND PUT EVERY REMOVED ONE TO THE DISCARD PILE
+        finishPlay();
     }
     else if (cardName == "Take Another Turn") {
-        // change next? Something like that
-        // reduce plays left on the game state
+        // CHANGE NEXT IN GAME STATE (to decide better)
+        finishPlay();
     }
     else if (cardName == "Taxation") {
-        //
+        // no ideas yet
     }
     else if (cardName == "Trade Hands") {
-        // select player with whom change cards
-        player = true;
+        selectPlayer = true;
+        special = "trade";
     }
     else if (cardName == "Trash a New Rule") {
-        //
+        field = 1;
+        rmRules = true;
     }
     else if (cardName == "Use What You Take") {
-        // select a player and play randomly one of their cards
+        selectPlayer = true;
+        special = "take and use";
     }
     else if (cardName == "Creeper Sweeper") {
-        // removes all creepers in front of each player
-        // reduce plays left on the game state
+        // PUT: NULL IN ALL PLAYER'S CREEPERS AND PUT EVERY REMOVED ONE TO THE DISCARD PILE
+        finishPlay();
     }
     else if (cardName == "Trash Something") {
-        // select a card to trash
         field = 1;
+        special = "trash";
     }
     else if (cardName == "Steal Something") {
-        // select a card to steal
         field = 1;
+        special = "steal";
     }
     else if (cardName == "Mix It All Up") {
-        // put all cards in an array and give them randomly
-        // reduce plays left on the game state
+        // GET/PUT/A LOT OF STUFF
+        finishPlay();
     }
+}
+
+function finishPlay() {
+    // PUT: DECREASE PLAYS LEFT IN GAME STATE BY ONE
+    let playsLeft;
+    // GET: PLAYS LEFT FROM GAME STATE
+    let lastRandom;
+    // GET: LAST RANDOM FROM GAME STATE
+    let firstRandom;
+    // GET: FIRST RANDOM FROM GAME STATE
+    let handCards;
+
+    if (playsLeft == 1 && lastRandom) {
+        // GET: HAND FROM PLAYER (NAME)
+        // randomly play one card of the hand
+    }
+    if (playsLeft == 0) {
+        // ???: CHANGE TURN TO PLAYERS THROUGH GAME STATE
+        // PUT: PLAYS LEFT = PLAY IN GAME STATE
+        activePlayer = "next";
+        // GET: PLAYER THAT IS PLAYING
+
+        if (firstRandom) {
+            // GET: HAND FROM PLAYER (NAME) - the new player
+            // randomly play one card of the hand
+        }
+    }
+    
+    // socket.io + ReactJS to update
 }
 
 function checkVictory() {
