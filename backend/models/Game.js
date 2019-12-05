@@ -11,8 +11,8 @@ const GameSchema = new mongoose.Schema(
         draw: { type: Number, required: true },
         play: { type: Number, required: true },
         playLeft: { type: Number, required: true },
-        maxHand: { type: Number, required: true },
-        maxKeepers: { type: Number, required: true },
+        maxHand: { type: Number},
+        maxKeepers: { type: Number},
         rules: { type: Array, default: [] },
         goal: {}, // definition required
         discard: { type: Array, default: [] },

@@ -27,6 +27,10 @@ let sendJSON = (res, status, obj) => {
     res.status(status).type('application/json').json(obj).end();
 }
 
+router.get('/', (req, res) => {
+    res.status(200).type('html').write('hello world').end();
+});
+
 router.put('/deck/:deckId', (req,res) => {
     let update = {};
     update.size = req.body.size;
