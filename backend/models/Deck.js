@@ -10,6 +10,6 @@ const DeckSchema = new mongoose.Schema(
     }
 );
 
-mongoose.model('Favorites', DeckSchema);
+mongoose.model('Deck', DeckSchema);
 
 module.exports = DeckSchema;

@@ -13,6 +13,6 @@ const CardSchema = new mongoose.Schema(
     }
 );
 
-mongoose.model('Favorites', CardSchema);
+mongoose.model('Card', CardSchema);
 
 module.exports = CardSchema;

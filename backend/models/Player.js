@@ -8,6 +8,7 @@ const PlayerSchema = new mongoose.Schema(
         order: { type: Number, required: true },
         name: { type: String, default: "player_name" },
         isPlaying: { type: Boolean, default: false },
+        played: { type: Number, default: 0},
         hand: { type: Array, default: [] },
         keepers: { type: Array, default: [] },
         creepers: { type: Array, default: [] },
@@ -15,6 +16,6 @@ const PlayerSchema = new mongoose.Schema(
     }
 );
 
-mongoose.model('Favorites', PlayerSchema);
+mongoose.model('Player', PlayerSchema);
 
 module.exports = PlayerSchema;

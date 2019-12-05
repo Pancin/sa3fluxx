@@ -28,6 +28,6 @@ const GameSchema = new mongoose.Schema(
     }
 );
 
-mongoose.model('Favorites', GameSchema);
+mongoose.model('Game', GameSchema);
 
 module.exports = GameSchema;
