@@ -14,7 +14,7 @@ app.use(bodyParser.text())
 app.use(express.static(path.join(__dirname, 'public')));
 
 //configure routers
-const routers = require('./routes/routers');
+const routers = require('./backend/routes/routers');
 app.use('/', routers.root);
 
 module.exports = app;

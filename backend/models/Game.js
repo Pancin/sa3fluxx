@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const GameSchema = new mongoose.Schema(
     {
         deck: { type: Array, default: [] },
-        activePlayer: { type: Number, required: true },
+        activePlayer: { type: Number, required: true }, //counterpart of Player.order
         players: { type: Array, default: [] },
         draw: { type: Number, required: true },
         play: { type: Number, required: true },

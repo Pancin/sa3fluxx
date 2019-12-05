@@ -1,4 +1,5 @@
 var app = require('../app');
+var debug = require('debug');
 
 app.set('port', process.env.PORT || 3000);
 
