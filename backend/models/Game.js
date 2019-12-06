@@ -5,12 +5,14 @@
 const mongoose = require('mongoose');
 const GameSchema = new mongoose.Schema(
     {
+        roomId: {type: String, required: true},
         deck: { type: Array, default: [] },
         activePlayer: { type: Number, required: true }, //counterpart of Player.order
         players: { type: Array, default: [] },
         draw: { type: Number, required: true },
         play: { type: Number, required: true },
         playLeft: { type: Number, required: true },
+        islocked: { type: Boolean, default: false }, //waiting for everybody to discard et simila
         maxHand: { type: Number},
         maxKeepers: { type: Number},
         rules: { type: Array, default: [] },

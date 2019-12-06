@@ -114,7 +114,7 @@ router.get('/player/byName', (req, res) => {
         });
 });
 
-router.put('/player/byName', (req,res) => {
+router.put('/player/byName', (req, res) => {
     let filter = {};
     filter.name = req.body.name;
     let update = {};
@@ -126,10 +126,29 @@ router.put('/player/byName', (req,res) => {
     update.creepers = req.body.creepers;
     update.canWin = req.body.canWin;
 
-    Player.findOneAndUpdate(filter, update, {new:true})
-    .then(update => {
-        //do stuff
-    })
+    Player.findOneAndUpdate(filter, update, { new: true })
+        .then(updated => {
+            if (!updated) throw new Error('not found');
+            if (acceptJSON(req)) sendJSON(res, 200, updated);
+            else res.sendStatus(200);
+        })
+        .catch(err => {
+            console.log(err);
+            if (validContentType(req)) {
+                let newPlayer = new Player(update);
+                newPlayer.save()
+                    .then(saved => {
+                        if (!saved) throw new Error('failed to save');
+                        if (acceptJSON(req)) sendJSON(res, 201, saved);
+                        else res.sendStatus(201);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.sendStatus(400);
+                    });
+            }
+            else sendStatus(400);
+        });
 });
 
 //expects a body {url:<cardURL>}
@@ -155,33 +174,33 @@ router.put('/card/byFilename', (req, res) => {
     let filter = { filename: req.body.filename };
     let update = {};
     update.filename = req.body.filename;
-    update.name = (req.body.name)?req.body.name:undefined;
-    update.dataURL = (req.body.dataURL)?req.body.dataURL:undefined;
-    update.description = (req.body.description)?req.body.description:undefined;
-    update.type = (req.body.type)?req.body.type:undefined;
+    update.name = (req.body.name) ? req.body.name : undefined;
+    update.dataURL = (req.body.dataURL) ? req.body.dataURL : undefined;
+    update.description = (req.body.description) ? req.body.description : undefined;
+    update.type = (req.body.type) ? req.body.type : undefined;
 
-    Card.findOneAndUpdate(filter, update, {new: true})
-    .then(updated => {
-        if (!updated) throw new Error('not found');
-        if (acceptJSON(req)) sendJSON(res, 200, updated);
-        else res.sendStatus(200);
-    })
-    .catch(err => {
-        if (validContentType(req)) {
-            let newCard = new Card(update);
-            newCard.save()
-            .then(saved => {
-                console.log(saved);
-                res.sendStatus(201);
-            }).catch(err => {
-                console.log(err);
-                res.sendStatus(500);
-            });
-        }
-        else {
-            res.sendStatus(400);
-        }
-    })
+    Card.findOneAndUpdate(filter, update, { new: true })
+        .then(updated => {
+            if (!updated) throw new Error('not found');
+            if (acceptJSON(req)) sendJSON(res, 200, updated);
+            else res.sendStatus(200);
+        })
+        .catch(err => {
+            if (validContentType(req)) {
+                let newCard = new Card(update);
+                newCard.save()
+                    .then(saved => {
+                        console.log(saved);
+                        res.sendStatus(201);
+                    }).catch(err => {
+                        console.log(err);
+                        res.sendStatus(500);
+                    });
+            }
+            else {
+                res.sendStatus(400);
+            }
+        })
 });
 
 router.put('/deck/:deckId', (req, res) => {
