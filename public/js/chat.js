@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style/game.css';
-import Center from './Center';
+import GameChat from './GameChat';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Center />, document.getElementById('center'));
+ReactDOM.render(<GameChat />, document.getElementById('chat'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
