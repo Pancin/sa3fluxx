@@ -8,27 +8,30 @@ class Center extends React.Component {
 		this.state = {
 			deck: 0,
 			activePlayer: 0,
-			players: [
-				{
-					name: 'Locomotanya',
-					id: 0,
-					isPlayer: true,
+			player: {
+				name: '',
+				playsLeft: 1,
+				keepers: {},
+				creepers: {},
+			},
+			otherPlayer: [{
+					name: '',  //right
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
 				},
 				{
-					name: 'Termosimone',
-					id: 1,
-					isPlayer: false,
+					name: '', //top
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
 				},
 				{
-					name: 'Cataclismio',
-					id: 2,
-					isPlayer: false,
+					name: '',  //left
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
 				},
-				{
-					name: 'Olofausto',
-					id: 3,
-					isPlayer: false,
-				}
 			],
 			draw: 0,
 			play: 0,
@@ -41,15 +44,13 @@ class Center extends React.Component {
 
 			cardToZoom: null,
 		}
-
-
 	}
 
 	changeZoomCard = function (card) {
 		this.setState({cardToZoom: card});
 	}
 
-
+	//axios require
 
 	render() {
 		return (
@@ -58,6 +59,8 @@ class Center extends React.Component {
 					cardToZoom = {this.state.cardToZoom}
 				/>
 				<Game 
+					player = {this.state.player}
+					otherPlayer = {this.state.otherPlayer}
 					changeZoomCard={this.changeZoomCard}
 				/>
 				<Hand 
@@ -69,4 +72,4 @@ class Center extends React.Component {
 }
 
 
-export default App;
+export default Center;

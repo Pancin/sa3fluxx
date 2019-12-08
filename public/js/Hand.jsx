@@ -10,14 +10,18 @@ class Hand extends React.Component {
 		}
 	}
 
-	// event listener for cards that call function this.props.changeZoomCard(card)
+	mapHand() {
+		this.state.hand.map(card => <img src={card.src}/>);
+	}
+
+	//event listener for cards that call function this.props.changeZoomCard(card)
 
 	render() {
 
 		return (
             <div className="Hand" id="hand">
                 <div id="bLeft"><img src="../media/img/leftArrow.png" class="arrow"></img></div>
-                <div id="handCards"></div>
+                <div id="handCards">{this.state.hand}</div>
                 <div id="bRight"><img src="../media/img/rightArrow.png" class="arrow"></img></div>
             </div> 
 		);

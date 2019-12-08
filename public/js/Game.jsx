@@ -4,41 +4,60 @@ import axios from 'axios';
 class Game extends React.Component {
 
 	constructor(props) {
-		super(props) ;
+		super(props);
 		this.state = {
-			player: { },
-			otherPlayer: [ {name: 'Locomotanya', id: 0, isPlayer: true,},
-				{name: 'Termosimone', id: 1, isPlayer: false,},
-				{name: 'Cataclismio', id: 2, isPlayer: false,},
-				{name: 'Olofausto', id: 3, isPlayer: false,} 
+			player: {
+				name: '',
+				playsLeft: 1,
+				keepers: {},
+				creepers: {},
+			},
+			otherPlayer: [{
+					name: '',  //right
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
+				},
+				{
+					name: '', //top
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
+				},
+				{
+					name: '',  //left
+					creepers: {},
+					keepers: {},
+					cardsN: 0,
+				},
 			],
 		}
 	}
 
-	//axios require
+	//axios require - Nope, riceve da sopra?
+
+	//event listener for cards that call function this.props.changeZoomCard(card)
 
 	render() {
 
 		return (
 			<div className="Game" id="game">
-				<OtherPlayerLeft 
-					player={this.state.otherPlayer[3]}
+				<OtherPlayerLeft
+					player={this.state.otherPlayer[2]}
 				/>
 				<div id="gameCenter">
-					<OtherPlayerTop 
-						player={this.state.otherPlayer[2]}
+					<OtherPlayerTop
+						player={this.state.otherPlayer[1]}
 					/>
-					<Middle 
-						boh={this.state.boh}  //useful?
-					/> 
+					<Middle/>
 					<Player
-						player={this.state.otherPlayer[0]}
+						player={this.state.player}
 					/>
 				</div>
-				<OtherPlayerRight 
-					player={this.state.otherPlayer[1]}
+				<OtherPlayerRight
+					player={this.state.otherPlayer[0]}
 				/>
-      		</div>
+			</div>
 		);
 	}
 }
