@@ -8,22 +8,46 @@ body {
     flex-direction: row;
     margin: 0%;
     min-height: 100%;
+    background-color: ivory;
 }
 
 #sidenav {
     flex-basis: 10%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    font-size: 22px;
-    background-color: coral;
+    font-size: 26px;
+    background-color: rgba(255, 127, 80, 0.6);
 }
 
-#sidenav div {
-    margin: 10%;
+#sidenav .container {
+    display: flex;
+    flex-direction: column;
+    height: 21%;
+    min-height: 100px;
+    background-color: rgb(255, 127, 80);
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-basis: 90%;
-    background-color: ivory;
+    font-size: 150%;
+}
+
+.divisor {
+    display: flex;
+    flex-direction: row;
+    width: 330px;
+}
+
+input{
+    font-size: 80%;
+    margin-left: 3%;
+}
+
+button {
+    font-size: 120%;
 }
