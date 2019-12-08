@@ -6,31 +6,12 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props) ;
 		this.state = {
-			player: {
-
-			},
-			otherPlayer: [
-				{
-					name: 'Locomotanya',
-					id: 0,
-					isPlayer: true,
-				},
-				{
-					name: 'Termosimone',
-					id: 1,
-					isPlayer: false,
-				},
-				{
-					name: 'Cataclismio',
-					id: 2,
-					isPlayer: false,
-				},
-				{
-					name: 'Olofausto',
-					id: 3,
-					isPlayer: false,
-				}
-			]
+			player: { },
+			otherPlayer: [ {name: 'Locomotanya', id: 0, isPlayer: true,},
+				{name: 'Termosimone', id: 1, isPlayer: false,},
+				{name: 'Cataclismio', id: 2, isPlayer: false,},
+				{name: 'Olofausto', id: 3, isPlayer: false,} 
+			],
 		}
 	}
 
