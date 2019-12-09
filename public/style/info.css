@@ -4,6 +4,7 @@ html {
 }
 
 body {
+    /* font-family: 'Montserrat', sans-serif; */
     display: flex;
     flex-direction: row;
     margin: 0%;
@@ -30,5 +31,10 @@ body {
 }
 
 main {
-    /*  */
+    padding: 5vh;
+}
+
+main h1{
+    text-align: center;
+    margin-top: 0;
 }
