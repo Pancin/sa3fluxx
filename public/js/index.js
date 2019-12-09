@@ -1,4 +1,3 @@
-// INDEX
 window.addEventListener('scroll', function (e) {
     let scrolled = window.pageYOffset;
 
@@ -8,4 +7,3 @@ window.addEventListener('scroll', function (e) {
     let last_boxes = document.querySelector('.indexBoxTwo');
     last_boxes.style.opacity = 0 + 1.3 * scrolled / screen.height;
 })
-// END OF INDEX

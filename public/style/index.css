@@ -14,10 +14,11 @@ body{
 
 /* BACKGROUNDS */
 body.index{
-    background-image: url("./nightBackground.jpg");
+    background-image: url("../media/img/indexBackground.jpg");
     height: 100vh;
     width: 100%;
-    background-position: top;
+    background-repeat: repeat;
+    background-position: center; 
 }
 /* END OF BACKGROUNDS */
 
@@ -28,12 +29,13 @@ div.firstBackground{
 }
 
 div.secondBackground {
-    background-image: url("./black.jpeg");
+    background-image: url("../media/img/black.jpeg");
     background-attachment: scroll;
     background-size: cover;
     height: 100vh;
     width: 100%;
-    background-position: top;
+    background-repeat: repeat;
+    background-position: center; 
 }
 
 div.indexBoxOne {
@@ -91,7 +93,4 @@ div.indexBoxTwo a:hover{
     border-radius: 200px;
     transition: background-color 0.8s;
 }
-
- 
-
 /* END OF INDEX */
