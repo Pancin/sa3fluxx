@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style/game.css";
+// import "./style/game.css";
 import Login from "./Login.js";
 import MessagingPanel from "./MessagingPanel";
 

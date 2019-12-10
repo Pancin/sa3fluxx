@@ -30,24 +30,5 @@ body {
 }
 
 main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-basis: 90%;
-    font-size: 150%;
-}
-
-.divisor {
-    display: flex;
-    flex-direction: row;
-    width: 330px;
-}
-
-input{
-    font-size: 80%;
-    margin-left: 3%;
-}
-
-button {
-    font-size: 120%;
+    /*  */
 }
