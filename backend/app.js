@@ -17,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 const routers = require('./routes/routers');
 console.log(routers)
 app.use('/', routers.root);
+app.use('/model', routers.model);
 
 module.exports = app;

@@ -7,8 +7,8 @@ const GameSchema = new mongoose.Schema(
     {
         roomId: {type: String, required: true},
         deck: { type: Array, default: [] },
-        activePlayer: { type: Number, required: true }, //counterpart of Player.order
-        players: { type: Array, default: [] },
+        activePlayer: { type: String, required: true }, //player name
+        players: { type: Array, default: [] }, //array of names
         draw: { type: Number, required: true },
         play: { type: Number, required: true },
         playLeft: { type: Number, required: true },
