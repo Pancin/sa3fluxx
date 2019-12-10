@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import "./style/game.css";
 
 class Center extends React.Component {
 

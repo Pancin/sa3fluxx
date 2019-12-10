@@ -1,9 +1,4 @@
-html {
-    min-height: 100%;
-    height: 100%;
-}
-
-body {
+.info-container {
     display: flex;
     flex-direction: row;
     margin: 0%;
@@ -22,7 +17,7 @@ body {
 #sidenav .container {
     display: flex;
     flex-direction: column;
-    height: 21%;
+    height: 21vh;
     min-height: 100px;
     background-color: rgb(255, 127, 80);
     align-items: center;
@@ -30,5 +25,12 @@ body {
 }
 
 main {
-    /*  */
+    padding: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main h1{
+    text-align: center;
+    margin-top: 0;
 }

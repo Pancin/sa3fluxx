@@ -2,6 +2,7 @@ import React from 'react';
 import Center from './Center';
 import GameChat from './GameChat';
 import Connect from './Connect';
+import Info from './Info';
 import Home from './Home';
 import {
     BrowserRouter as Router,
@@ -13,7 +14,6 @@ import {
 class App extends React.Component {
 
     render() {
-        console.log('sadsda')
         return (
             <Router>
                 <div>
@@ -21,7 +21,7 @@ class App extends React.Component {
                         <Route path="/game">
                             <div className="App" id="App" >
                                 <div id="left">
-                                    <div id="sidenav">
+                                    <div id="sidenavGame">
                                         <div>Homepage</div>
                                         <div>Info</div>
                                         <div>Play</div>
@@ -38,7 +38,7 @@ class App extends React.Component {
                             <Connect />
                         </Route>
                         <Route path="/info">
-                            <div />
+                            <Info />
                         </Route>
                         <Route path="/">
                             <Home />
