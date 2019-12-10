@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="author" content="Aron Dalle Pezze, Fluxx Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fluxx - Game</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style/game.css" />
+    <link rel="icon" href="../media/img/icon.jpg">
+</head>
+
+<body>
+    <div id="App">
+        <div id="left">
+            <!-- column | -->
+            <div id="sidenav">
+                <div>Homepage</div>
+                <div>Info</div>
+                <div>Play</div>
+            </div> <!-- row - -->
+            <div id="log"></div>
+        </div>
+
+
+        <div id="center">
+            <!-- column | -->
+            <div id="game">
+                <!-- row - -->
+                <div id="gameLeft" className="playerLeft">
+                    <!-- column | -->
+                    <div id="leftName">Olofausto</div>
+                    <div id="leftCards">
+                        <!-- row - -->
+                        <div id="leftCC">
+                            <!-- column | -->
+                            <div id="leftCardsN">Cards: 0</div>
+                            <div id="leftCreepers"></div> <!-- column | -->
+                        </div>
+                        <div id="leftKeepers"></div> <!-- column | -->
+                        <!-- MAX 10 normal view -->
+                    </div>
+                </div>
+
+
+                <div id="gameCenter">
+                    <!-- column | -->
+                    <div id="top" className="playerTop">
+                        <!-- column | -->
+                        <div id="topName">Pellicangelo</div>
+                        <div id="topCC">
+                            <!-- row - -->
+                            <div id="topCardsN">Cards: 0</div>
+                            <div id="topCreepers"></div> <!-- row - -->
+                        </div>
+                        <div id="topKeepers"></div> <!-- row - -->
+                        <!-- MAX 9 normal view -->
+                    </div>
+
+                    <div id="middle" className="Middle">
+                        <!-- column | -->
+                        <div id="ddg">
+                            <!-- row - -->
+                            <div id="draw"><img src="../media/img/draw1.png"></div>
+                            <div id="play"><img src="../media/img/play1.png"></div>
+                            <div id="void"></div>
+                            <div id="discard"></div>
+                            <div id="deckimg">
+                                <img src="../media/img/deck.png">
+                                <div id="deck">90</div>
+                            </div>
+                            <div id="void"></div>
+                            <div id="goal"></div>
+                            <div id="void"></div>
+                        </div>
+                        <div id="rules"></div><!-- row - -->
+                        <!-- MAX 8 -->
+                    </div>
+
+                    <div id="bottom" className="playerBottom">
+                        <!-- column | -->
+                        <div id="bottomKeepers"></div> <!-- row - -->
+                        <!-- MAX 9 normal view -->
+                        <div id="bottomCC">
+                            <!-- row - -->
+                            <div id="bottomName">Sigisgulfo</div>
+                            <div id="bottomCreepers"></div> <!-- row - -->
+                            <div id="playsLeft">Plays left: 1</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="gameRight" className="playerRight">
+                    <!-- column | -->
+                    <div id="rightName">Piertucano</div>
+                    <div id="rightCards">
+                        <!-- row - -->
+                        <div id="rightKeepers"></div> <!-- column | -->
+                        <!-- MAX 10 normal view -->
+                        <div id="rightCC">
+                            <!-- column | -->
+                            <div id="rightCardsN">Cards: 0</div>
+                            <div id="rightCreepers"></div> <!-- column | -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hand" className="Hand">
+                <!-- row - -->
+                <div id="bLeft"><img src="../media/img/leftArrow.png" class="arrow"></div>
+                <div id="handCards"></div> <!-- row - -->
+                <!-- MAX 15 -->
+                <div id="bRight"><img src="../media/img/rightArrow.png" class="arrow"></div>
+            </div>
+        </div>
+
+
+        <div id="right">
+            <div id="chat"></div>
+        </div>
+    </div>
+
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
