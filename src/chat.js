@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/game.css';
+// import './style/game.css';
 import GameChat from './GameChat';
 import * as serviceWorker from './serviceWorker';
 
