@@ -1,7 +1,38 @@
 import React from 'react';
 import './style/connect.css';
+import axios from 'axios'
 
 class Connect extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            nickname: '',
+            roomId: '',
+        }
+    }
+
+    onConnect = (event) => {
+        event.preventDefault(); //so that it doesn't refresh
+        axios.create({
+            baseURL: 'http://localhost:3001' //server port
+        })
+            .post('/login',
+                {
+                    nickname: this.state.nickname,
+                    roomId: this.state.roomId,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            .finally(response => {
+                this.props.changeNickname(this.state.nickname, () => console.log(this.props.history))
+            })
+    }
+
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
 
     render() {
         return (
@@ -15,18 +46,18 @@ class Connect extends React.Component {
                 </div>
 
                 <main>
-                    <form>
+                    <form onSubmit={this.onConnect}>
                         <div className="divisor">
                             Nickname:
-                            <input type="text" name="name" />
+                        <input type="text" name="nickname" value={this.state.nickname} onChange={this.handleChange} />
                         </div>
                         <br />
                         <div className="divisor">
                             Room ID:
-                            <input type="text" name="id" />
+                        <input type="text" name="roomId" value={this.state.roomId} onChange={this.handleChange} />
                         </div>
                         <br />
-                        <button>Connect</button>
+                        <input type="submit" />
                     </form>
                 </main>
             </div>

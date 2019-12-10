@@ -9,7 +9,7 @@ let clients = [];
 wss.on("connection", connection => {
   clients.push(connection);
   console.log(connection);
-//   broadcast({username: "admin", message: "a user has enetered the room"}) 
+  //   broadcast({username: "admin", message: "a user has enetered the room"}) 
 
   connection.on("message", message => {
     const data = JSON.parse(message);
@@ -21,21 +21,21 @@ wss.on("connection", connection => {
 setInterval(cleanUp, 100)
 
 function broadcast(message) {
-    const data =JSON.stringify(message)
-    clients.forEach(client => client.send(JSON.stringify(data)));
+  const data = JSON.stringify(message)
+  clients.forEach(client => client.send(JSON.stringify(data)));
 }
 
-function cleanUp(){
-    const clientsLeaving = clients.filter(client => client.readyState == client.CLOSED)
-    clients = clients.filter(client => client.readyState !== client.CLOSED)
-    clientsLeaving.forEach(client => broadcast({username: "admin", message: "a user has left the room"}))
+function cleanUp() {
+  const clientsLeaving = clients.filter(client => client.readyState == client.CLOSED)
+  clients = clients.filter(client => client.readyState !== client.CLOSED)
+  clientsLeaving.forEach(client => broadcast({ username: "admin", message: "a user has left the room" }))
 }
 
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 var server = app.listen(app.get('port'), function () {
-    debug('Express server listening on port ' + server.address().port);
+  debug('Express server listening on port ' + server.address().port);
 });
 
 //sockets

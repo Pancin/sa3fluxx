@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const PlayerSchema = new mongoose.Schema(
     {
         roomId: { type: String, required: true },
-        order: { type: Number, required: true },
+        order: { type: Number },
         name: { type: String, default: "player_name" },
         isPlaying: { type: Boolean, default: false },
         hand: { type: Array, default: [] },

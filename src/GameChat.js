@@ -5,7 +5,7 @@ import MessagingPanel from "./MessagingPanel";
 
 class GameChat extends Component {
   state = {
-    username: null
+    username: this.props.nickname || null
   };
 
   setUsername = username => {
@@ -17,8 +17,8 @@ class GameChat extends Component {
         {!this.state.username ? (
           <Login setUsername={this.setUsername} />
         ) : (
-          <MessagingPanel username={this.state.username} />
-        )}
+            <MessagingPanel username={this.state.username} />
+          )}
       </div>
     );
   }

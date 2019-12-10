@@ -8,14 +8,33 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
-  } from "react-router-dom";
+    Link,
+    Redirect,
+} from "react-router-dom";
 
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            nickname: ''
+        }
+    }
+
+    changeNickname = (newNickname) => {
+        this.setState({
+            nickname: newNickname,
+            toGame: true,
+        });
+    }
 
     render() {
         return (
             <Router>
+                {
+                    this.state.toGame ? <Redirect to='/game' /> : <React.Fragment /> //if true, redirect, else return a void fragment
+                }
                 <div>
                     <Switch>
                         <Route path="/game">
@@ -28,18 +47,24 @@ class App extends React.Component {
                                     </div>
                                     <div id="log"></div>
                                 </div>
-                                <Center />
+                                <Center nickname={this.state.nickname} />
                                 <div id="right">
-                                    <GameChat />
+                                    <GameChat nickname={this.state.nickname} />
                                 </div>
                             </div>
                         </Route>
-                        <Route path="/connect">
-                            <Connect />
+
+                        <Route path="/connect" >
+                            <Connect
+                                nickname={this.state.nickname}
+                                changeNickname={this.changeNickname}
+                            />
                         </Route>
+
                         <Route path="/info">
                             <Info />
                         </Route>
+
                         <Route path="/">
                             <Home />
                         </Route>
