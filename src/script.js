@@ -20,3 +20,5 @@ leftPlayer.addEventListener("click", () => selectedPlayer(leftPlayer));
 topPlayer.addEventListener("click", () => selectedPlayer(topPlayer));
 rightPlayer.addEventListener("click", () => selectedPlayer(rightPlayer));
 bottomPlayer.addEventListener("click", () => selectedPlayer(bottomPlayer));
+
+//PUT TO THE "SCRIPT_SERVER.JS"
