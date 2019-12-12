@@ -7,16 +7,16 @@ const GameSchema = new mongoose.Schema(
     {
         roomId: {type: String, required: true},
         deck: { type: Array, default: [] },
-        activePlayer: { type: String, required: true }, //player name
+        activePlayer: { type: String }, //player name
         players: { type: Array, default: [] }, //array of names
-        draw: { type: Number, required: true },
-        play: { type: Number, required: true },
-        playLeft: { type: Number, required: true },
+        draw: { type: Number, default: 1 },
+        play: { type: Number, default: 1 },
+        playLeft: { type: Number, default: 1 },
         islocked: { type: Boolean, default: false }, //waiting for everybody to discard et simila
         maxHand: { type: Number},
         maxKeepers: { type: Number},
         rules: { type: Array, default: [] },
-        goal: {}, // definition required
+        goal: {type: String }, // definition required
         discard: { type: Array, default: [] },
         war: { type: Boolean, default: false }, //flag for goal
         tv: { type: Boolean, default: false }, //flag for goal

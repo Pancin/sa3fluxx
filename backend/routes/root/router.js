@@ -30,38 +30,22 @@ let sendJSON = (res, status, obj) => {
     res.status(status).type('application/json').json(obj).end();
 }
 
-// function putPlayerByName(req, res) {
-//     let filter = { name: req.body.name };
-//     let update = req.body;
-
-//     Player.findOneAndUpdate(filter, update, { new: true })
-//         .then(updated => {
-//             if (!updated) throw new Error('not found');
-//             if (acceptJSON(req)) sendJSON(res, 200, updated);
-//             else res.sendStatus(200);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             if (validContentType(req)) {
-//                 let newPlayer = new Player(update);
-//                 newPlayer.save()
-//                     .then(saved => {
-//                         if (!saved) throw new Error('failed to save');
-//                         if (acceptJSON(req)) sendJSON(res, 201, saved);
-//                         else res.sendStatus(201);
-//                     })
-//                     .catch(err => {
-//                         console.log(err);
-//                         res.sendStatus(400);
-//                     });
-//             }
-//             else sendStatus(400);
-//         });
-// }
-
 function postPlayerByName(body, res) {
     let newPlayer = new Player(body);
     newPlayer.save()
+        .then(saved => {
+            if (!saved) throw new Error('failed to save');
+            sendJSON(res, 201, saved);
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(400);
+        });
+}
+
+function postGameByRoomId(body, res) {
+    let newGame = new Game(body);
+    newGame.save()
         .then(saved => {
             if (!saved) throw new Error('failed to save');
             sendJSON(res, 201, saved);
