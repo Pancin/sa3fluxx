@@ -9,7 +9,7 @@ class OtherPlayerLeft extends React.Component {
 			name: '',
 			creepers: {},
 			keepers: {},
-			cardsN = 0,
+			cardsN: 0,
 		}
 	}
 

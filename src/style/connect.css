@@ -9,7 +9,6 @@ div.connect-container {
 #sidenav {
     flex-basis: 10%;
     display: flex;
-    flex-direction: column;
     font-size: 26px;
     background-color: rgba(255, 127, 80, 0.6);
 }
@@ -18,10 +17,34 @@ div.connect-container {
     display: flex;
     flex-direction: column;
     height: 21vh;
-    min-height: 100px;
-    background-color: rgb(255, 127, 80);
     align-items: center;
     justify-content: space-evenly;
+}
+
+#sidenav a {
+    flex-basis: 7vh;
+    width: 97%;
+    max-height: 69px;
+    min-height: 42px;
+    display: flex;
+    text-align: center;
+    text-decoration: none;
+    padding: 1.5%;
+    background-color: rgb(255, 127, 80);
+    transition: background-color 0.2s;
+    color: black;
+    justify-content: center;
+    align-items: center;
+}
+
+#sidenav a:hover {
+    background-color: rgb(174, 214, 240);
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+#sidenav a#active {
+    background-color: rgb(174, 214, 240);
 }
 
 main {

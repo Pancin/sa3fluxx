@@ -39,9 +39,9 @@ class Connect extends React.Component {
             <div className="connect-container">
                 <div id="sidenav">
                     <div className="container">
-                        <div>Homepage</div>
-                        <div>Info</div>
-                        <div>Play</div>
+                        <a href="/"><div class="nav">Homepage</div></a>
+                        <a href="/info"><div class="nav">Info</div></a>
+                        <a href="/connect" id="active"><div class="nav">Play</div></a>
                     </div>
                 </div>
 

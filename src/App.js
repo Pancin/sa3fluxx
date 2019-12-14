@@ -18,7 +18,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            nickname: ''
+            nickname: '',
+            toGame: false
         }
     }
 
@@ -41,9 +42,9 @@ class App extends React.Component {
                             <div className="App" id="App" >
                                 <div id="left">
                                     <div id="sidenavGame">
-                                        <div>Homepage</div>
-                                        <div>Info</div>
-                                        <div>Play</div>
+                                        <a href="/"><div class="nav">Homepage</div></a>
+                                        <a href="/info"><div class="nav">Info</div></a>
+                                        <a href="/connect" id="active"><div class="nav">Play</div></a>
                                     </div>
                                     <div id="log"></div>
                                 </div>

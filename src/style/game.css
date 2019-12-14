@@ -345,6 +345,33 @@ img.arrow:hover {
     background-color: coral;
 }
 
+#sidenavGame a {
+    flex-basis: 7vh;
+    width: 97%;
+    max-height: 69px;
+    min-height: 42px;
+    display: flex;
+    text-align: center;
+    text-decoration: none;
+    padding: 1.5%;
+    background-color: rgb(240, 78, 20);
+    transition: background-color 0.2s;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: 100px;
+}
+
+#sidenavGame a:hover {
+    background-color: rgb(5, 116, 190);
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+#sidenavGame a#active {
+    background-color: rgb(5, 116, 190);
+}
+
 #left {
     background-color: lightblue;
 }
