@@ -30,30 +30,27 @@ let sendJSON = (res, status, obj) => {
     res.status(status).type('application/json').json(obj).end();
 }
 
-function postPlayerByName(body, res) {
-    let newPlayer = new Player(body);
-    newPlayer.save()
-        .then(saved => {
-            if (!saved) throw new Error('failed to save');
-            sendJSON(res, 201, saved);
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(400);
-        });
+function postPlayerByName(req, res) {
+
+    let newPlayer = new Player({
+        name: req.body.nickname,
+        roomId: req.body.roomId
+    });
+    return newPlayer.save();
+    // .then(saved => {
+    //     if (!saved) throw new Error('failed to save');
+    //     sendJSON(res, 201, saved);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    //     res.sendStatus(400);
+    // });
 }
 
-function postGameByRoomId(body, res) {
-    let newGame = new Game(body);
-    newGame.save()
-        .then(saved => {
-            if (!saved) throw new Error('failed to save');
-            sendJSON(res, 201, saved);
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(400);
-        });
+function postGameByRoomId(req, res) {
+    let newGame = new Game(req.body);
+    return newGame.save();
+
 }
 
 router.post('/login', (req, res) => {
@@ -64,13 +61,57 @@ router.post('/login', (req, res) => {
             else res.sendStatus(403);
         })
         .catch(err => {
-            let antani = {
-                name: req.body.nickname,
-                roomId: req.body.roomId
-            }
-            postPlayerByName(antani, res);
+            postPlayerByName(req, res)
+                .then(saved => {
+                    if (!saved) throw new Error('failed to save');
+                    sendJSON(res, 201, saved);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.sendStatus(400);
+                });
         });
 });
+
+router.delete('/player', (req, res) => {
+    Player.findOneAndDelete({ name: req.body.nickname })
+        .then(() => {
+            if (!found) res.sendStatus(404);
+            else res.sendStatus(204);
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+});
+
+router.delete('/player/wipe', (req, res) => {
+    Player.find({}).then(list => {
+        list.forEach(el => {
+            Player.remove();
+        });
+    }).then(() => {
+        res.sendStatus(204);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+});
+
+function hasCard(player, cardname) {
+    player.hand.forEach(card => {
+        if (card.filename == cardname) return true;
+    });
+    return false;
+}
+
+function playKeeper(req) {
+    Player.findOne({name:req.body.nickname})
+    .then(player => {
+        if(!player) throw new Error('not found');
+        // else
+    })
+}
 
 // const modelURL = 'localhost:3000/model';
 
