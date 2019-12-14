@@ -1,6 +1,6 @@
 import React from 'react';
 import './style/connect.css';
-import axios from 'axios'
+import axios from 'axios';
 
 class Connect extends React.Component {
 
@@ -14,8 +14,8 @@ class Connect extends React.Component {
     onConnect = (event) => {
         event.preventDefault(); //so that it doesn't refresh
         axios.create({
-            baseURL: 'http://localhost:3001' //server port
-        })
+            baseURL: 'http://localhost:3001', //server port
+            })
             .post('/login',
                 {
                     nickname: this.state.nickname,
@@ -23,8 +23,11 @@ class Connect extends React.Component {
                 {
                     headers: { 'Content-Type': 'application/json' }
                 })
-            .finally(response => {
+            .then(response => {
                 this.props.changeNickname(this.state.nickname);
+            })
+            .catch(err => {
+                alert("Gno. You cagnnot enter.");
             })
     }
 
@@ -37,9 +40,9 @@ class Connect extends React.Component {
             <div className="connect-container">
                 <div id="sidenav">
                     <div className="container">
-                        <a href="/"><div class="nav">Homepage</div></a>
-                        <a href="/info"><div class="nav">Info</div></a>
-                        <a href="/connect" id="active"><div class="nav">Play</div></a>
+                        <a href="/"><div className="nav">Homepage</div></a>
+                        <a href="/info"><div className="nav">Info</div></a>
+                        <a href="/connect" id="active"><div className="nav">Play</div></a>
                     </div>
                 </div>
 

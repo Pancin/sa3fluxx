@@ -1,4 +1,8 @@
 import React from 'react';
+import { Modal } from 'antd';
+import 'antd/dist/antd.css';
+
+const axios = require('axios');
 
 class Middle extends React.Component {
 
@@ -12,12 +16,26 @@ class Middle extends React.Component {
 			goal: props.goal,
 			rules: props.rules,
 			cardsN: 0,
+
+			showDiscard: false,
 		}
 	}
 
 	static getDerivedStateFromProps(props, state) {
 		let newState = {...props};
-		newState.rules = props.rules.map(rule => <img src={rule.src}/>);
+		newState.rules = props.rules.map(card => (
+						<img src={card.src} onClick={() => {
+											axios.put('/selectedFieldCard',
+												{
+													player: this.props.player.name,
+													selectedCard: card.src,
+												},
+												{
+													headers: { 'Content-Type': 'application/json' }
+												})
+											}
+										}
+						/>));
 		newState.cardsN = props.deck.map((card, index) => index + 1);
 		return newState;
 	}
@@ -32,7 +50,10 @@ class Middle extends React.Component {
 					<div id="draw"><img src={this.draw.src}></img></div>
 					<div id="play"><img src={this.play.src}></img></div>
 					<div id="void"></div>
-					<div id="discard"><img src={this.state.discard[0].src}></img></div>
+					<div id="discard"><img src={this.state.discard[0].src} onClick={() => this.setState({showDiscard: true})}></img></div>
+					<Modal 
+						onClose = {() => this.setState({showDiscard: false})}
+						visible = {this.state.showDiscard}> {this.discard.map(card => <img src={card.src}/>)} </Modal>
 					<div id="deckimg">
 						<img src="../media/img/deck.png"></img>
 						<div id="deck">{this.state.cardsN}</div>

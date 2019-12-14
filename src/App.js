@@ -42,9 +42,9 @@ class App extends React.Component {
                             <div className="App" id="App" >
                                 <div id="left">
                                     <div id="sidenavGame">
-                                        <a href="/"><div class="nav">Homepage</div></a>
-                                        <a href="/info"><div class="nav">Info</div></a>
-                                        <a href="/connect" id="active"><div class="nav">Play</div></a>
+                                        <a href="/"><div className="nav">Homepage</div></a>
+                                        <a href="/info"><div className="nav">Info</div></a>
+                                        <a href="/connect" id="active"><div className="nav">Play</div></a>
                                     </div>
                                     <div id="log"></div>
                                 </div>

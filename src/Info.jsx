@@ -8,9 +8,9 @@ class Info extends React.Component {
             <div className="info-container">
                 <div id="sidenav">
                     <div className="container">
-                        <a href="/"><div class="nav">Homepage</div></a>
-                        <a href="/info" id="active"><div class="nav">Info</div></a>
-                        <a href="/connect"><div class="nav">Play</div></a>
+                        <a href="/"><div className="nav">Homepage</div></a>
+                        <a href="/info" id="active"><div className="nav">Info</div></a>
+                        <a href="/connect"><div className="nav">Play</div></a>
                     </div>
                 </div>
 

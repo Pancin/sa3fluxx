@@ -146,6 +146,7 @@ class Center extends React.Component {
 				<Hand 
 					hand={this.player.hand}
 					changeZoomCard={this.changeZoomCard}
+					player = {this.state.player}
 				/>
       		</div>
 		);

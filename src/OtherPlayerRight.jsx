@@ -1,4 +1,5 @@
 import React from 'react';
+const axios = require('axios');
 
 class OtherPlayerRight extends React.Component {
 
@@ -15,8 +16,32 @@ class OtherPlayerRight extends React.Component {
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(creeper => <img src={creeper.src}/>);
-		newState.keepers = props.player.keepers.map(keeper => <img src={keeper.src}/>);
+		newState.creepers = props.player.creepers.map(card => (
+							<img src={card.src} onClick={() => {
+												axios.put('/selectedFieldCard',
+													{
+														player: this.props.player.name,
+														selectedCard: card.src,
+													},
+													{
+														headers: { 'Content-Type': 'application/json' }
+													})
+												}
+											}
+							/>));
+		newState.keepers = props.player.keepers.map(card => (
+							<img src={card.src} onClick={() => {
+												axios.put('/selectedFieldCard',
+													{
+														player: this.props.player.name,
+														selectedCard: card.src,
+													},
+													{
+														headers: { 'Content-Type': 'application/json' }
+													})
+												}
+											}
+							/>));
 		newState.cardsN = props.player.hand.map((card, index) => index + 1);
 		return newState;
 	}
