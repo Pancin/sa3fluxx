@@ -1,20 +1,17 @@
 import React from 'react';
-import axios from 'axios';
 
 class Hand extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			hand: {},
+			hand: [],
 		}
 	}
 
-	mapHand() {
-		this.state.hand.map(card => <img src={card.src}/>);
+	static getDerivedStateFromProps(props, state) {
+		return {hand: props.hand.map(card => <img src={card.src}/>)};
 	}
-
-	//event listener for cards that call function this.props.changeZoomCard(card)
 
 	render() {
 

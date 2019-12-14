@@ -4,49 +4,28 @@ import OtherPlayerLeft from './OtherPlayerLeft';
 import OtherPlayerTop from './OtherPlayerTop';
 import OtherPlayerRight from './OtherPlayerRight';
 import Middle from './Middle';
-// import axios from 'axios';
 
 class Game extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			player: this.props.player,
-			// {
-			// 	name: '',
-			// 	playsLeft: 1,
-			// 	keepers: {},
-			// 	creepers: {},
-			// },
-			otherPlayer: [ this.props.otherPlayer[0], //right
-				this.props.otherPlayer[1], //top
-				this.props.otherPlayer[2], //left
-				// {
-				// 	name: '',  //right
-				// 	creepers: {},
-				// 	keepers: {},
-				// 	cardsN: 0,
-				// },
-				// {
-				// 	name: '', //top
-				// 	creepers: {},
-				// 	keepers: {},
-				// 	cardsN: 0,
-				// },
-				// {
-				// 	name: '',  //left
-				// 	creepers: {},
-				// 	keepers: {},
-				// 	cardsN: 0,
-				// },
+			player: props.player,
+			otherPlayers: [ props.otherPlayers[0], //right
+				props.otherPlayers[1], //top
+				props.otherPlayers[2], //left
 			],
-			gameState: null,
+			gameState: props.gameState,
 		}
 	}
 
-	//axios require - Nope, riceve da sopra?
-
-	//event listener for cards that call function this.props.changeZoomCard(card)
+	static getDerivedStateFromProps(props, state) {
+		let newState = {};
+		newState.player = props.player;
+		newState.otherPlayers = [props.otherPlayers[0], props.otherPlayers[1], props.otherPlayers[2]];
+		newState.gameState = props.gameState;
+		return newState;
+	}
 
 	render() {
 
@@ -61,7 +40,7 @@ class Game extends React.Component {
 					/>
 					<Middle
 						draw={this.gameState.draw}
-						play={this.gameState.play}
+						play={this.gameState.maxPlay}
 						discard={this.gameState.discard}
 						deck={this.gameState.deck}
 						goal={this.gameState.goal}

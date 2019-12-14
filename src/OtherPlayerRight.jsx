@@ -1,28 +1,25 @@
 import React from 'react';
-import axios from 'axios';
 
 class OtherPlayerRight extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
-			creepers: {},
-			keepers: {},
+			name: props.player.name,
+			creepers: props.player.creepers,
+			keepers: props.player.keepers,
 			cardsN: 0,
 		}
 	}
 
-	mapCreepers() {
-		this.state.creepers.map(creeper => <img src={creeper.src}/>);
+	static getDerivedStateFromProps(props, state) {
+		let newState = {};
+		newState.name = props.player.name;
+		newState.creepers = props.player.creepers.map(creeper => <img src={creeper.src}/>);
+		newState.keepers = props.player.keepers.map(keeper => <img src={keeper.src}/>);
+		newState.cardsN = props.player.hand.map((card, index) => index + 1);
+		return newState;
 	}
-	mapKeepers() {
-		this.state.keepers.map(keeper => <img src={keeper.src}/>);
-	}
-
-	//axios require - Nope, riceve da sopra?
-
-	//event listener for cards that call function this.props.changeZoomCard(card)
 
 	render() {
 

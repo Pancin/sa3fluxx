@@ -17,7 +17,7 @@ const GameSchema = new mongoose.Schema(
         maxKeepers: { type: Number },
         rules: { type: Array, default: [] },
         goal: { type: String },
-        discard: { typeß: Array, default: [] },
+        discard: { type: Array, default: [] },
         war: { type: Boolean, default: false }, //flag for goal
         tv: { type: Boolean, default: false }, //flag for goal
         silver: { type: Boolean, default: false }, //flag for goal/rule

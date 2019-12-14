@@ -8,7 +8,6 @@ class Connect extends React.Component {
         super(props)
         this.state = {
             nickname: '',
-            roomId: '',
         }
     }
 
@@ -20,18 +19,17 @@ class Connect extends React.Component {
             .post('/login',
                 {
                     nickname: this.state.nickname,
-                    roomId: this.state.roomId,
                 },
                 {
                     headers: { 'Content-Type': 'application/json' }
                 })
             .finally(response => {
-                this.props.changeNickname(this.state.nickname, () => console.log(this.props.history))
+                this.props.changeNickname(this.state.nickname);
             })
     }
 
     handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ nickname: event.target.value });
     }
 
     render() {
@@ -50,11 +48,6 @@ class Connect extends React.Component {
                         <div className="divisor">
                             Nickname:
                         <input type="text" name="nickname" value={this.state.nickname} onChange={this.handleChange} />
-                        </div>
-                        <br />
-                        <div className="divisor">
-                            Room ID:
-                        <input type="text" name="roomId" value={this.state.roomId} onChange={this.handleChange} />
                         </div>
                         <br />
                         <input type="submit" />

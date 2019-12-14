@@ -9,83 +9,127 @@ class Center extends React.Component {
 	constructor(props) {
 		super(props) ;
 		this.state = {
+			nickname: props.nickname,
+			playerNumber: 0,
+
 			deck: 0,
-			activePlayer: 0,
-			player: {
+			discard: 0,
+			player: {},
+			players: [],
+			otherPlayers: [{
 				name: '',
-				playsLeft: 1,
-				keepers: {},
-				creepers: {},
-				hand: {},
+				creepers: [],
+				keepers: [],
+				hand: [],
 			},
-			otherPlayer: [{
-					name: '',  //right
-					creepers: {},
-					keepers: {},
-					hand: {},
-					cardsN: 0,
-				},
-				{
-					name: '', //top
-					creepers: {},
-					keepers: {},
-					hand: {},
-					cardsN: 0,
-				},
-				{
-					name: '',  //left
-					creepers: {},
-					keepers: {},
-					hand: {},
-					cardsN: 0,
-				},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
 			],
 			draw: 0,
-			play: 0,
-			playLeft: 0,
-			maxHand: 0,
-			maxKeepers: 0,
+			maxPlay: 0,
+			playsLeft: 0,
+			currentPlayer: 0,
 			rules: [],
-			goal: {},
-			discard: [],
-
+			goal: '',
+			
+			nullPlayer: {name: '', creepers: [], keepers: [], hand: []},
 			cardToZoom: null,
+			change: false,
 		}
+		this.getGameState();
 	}
 
 	changeZoomCard = function (card) {
 		this.setState({cardToZoom: card});
 	}
-	
-	managePlayers = function (players) {
-		//
-	}
 
-	countCards = function (hand) {
-		//
+	managePlayers = () => {
+		if (this.state.players[0].name == this.state.nickname) {
+			this.setState({player: this.state.players[0]});
+			this.setState({playerNumber: 0});
+		}
+		else if (this.state.players[1].name == this.state.nickname) {
+			this.setState({player: this.state.players[1]});
+			this.setState({playerNumber: 1});
+		}
+		else if (this.state.players[2].name == this.state.nickname) {
+			this.setState({player: this.state.players[2]});
+			this.setState({playerNumber: 2});
+		}
+		else if (this.state.players[3].name == this.state.nickname) {
+			this.setState({player: this.state.players[3]});
+			this.setState({playerNumber: 3});
+		}
+
+		if (this.state.players.length() == 2) {
+			this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], this.state.nullPlayer, this.state.nullPlayer]});
+		}
+		else if (this.state.players.length() == 3) {
+			if (this.state.playerNumber == 0){
+				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.nullPlayer]});
+			}
+			else if (this.state.playerNumber == 1){
+				this.setState({otherPlayers: [this.state.players[0], this.state.players[2], this.state.nullPlayer]});
+			}
+			else if (this.state.playerNumber == 2){
+				this.setState({otherPlayers: [this.state.players[0], this.state.players[1], this.state.nullPlayer]});
+			}
+		}
+		else if (this.state.players.length() == 4) {
+			if (this.state.playerNumber == 0){
+				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.players[3]]});
+			}
+			else if (this.state.playerNumber == 1){
+				this.setState({otherPlayers: [this.state.players[2], this.state.players[3], this.state.players[0]]});
+			}
+			else if (this.state.playerNumber == 2){
+				this.setState({otherPlayers: [this.state.players[3], this.state.players[0], this.state.players[1]]});
+			}
+			else if (this.state.playerNumber == 3){
+				this.setState({otherPlayers: [this.state.players[0], this.state.players[1], this.state.players[2]]});
+			}
+		}
+
+		let newPlayer = this.state.player;
+		newPlayer.playsLeft = this.state.playsLeft;
+		this.setState(newPlayer);
 	}
 
 	getGameState = function () {
 		axios.get('/gamestate')
 		.then( res => {
-			this.state({
+			this.setState({
 				deck: res.deck,
-				activePlayer: res.activePlayer,
-				players: this.managePlayers(res.players),
-				draw: res.draw,
-				play: res.play,
-				playLeft: res.playLeft,
-				maxHand: res.maxHand,
-				maxKeepers: res.maxKeepers,
-				rules: res.rules,
-				goal: res.goal,
 				discard: res.discard,
-				// otherPlayer[0].cardsN: this.countCards(otherPlayer[0].hand),
-				// otherPlayer[1].cardsN: this.countCards(otherPlayer[0].hand),
-				// otherPlayer[2].cardsN: this.countCards(otherPlayer[0].hand),
-			})
+				players: res.players,
+				draw: res.draw,
+				maxPlay: res.maxPlay,
+				playsLeft: res.playsLeft,
+				currentPlayer: res.currentPlayer,
+				maxKeepers: res.maxKeepers,
+				goal: res.goal,
+				rules: res.rules,
+			}, () => this.managePlayers())
 		})
 	}
+
+	//socket that should call getGameState()
 
 	render() {
 		return (
@@ -95,7 +139,7 @@ class Center extends React.Component {
 				/> */}
 				<Game 
 					player = {this.state.player}
-					otherPlayer = {this.state.otherPlayer}
+					otherPlayers = {this.state.otherPlayers}
 					gameState={this.state}
 					changeZoomCard={this.changeZoomCard}
 				/>
