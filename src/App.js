@@ -19,14 +19,23 @@ class App extends React.Component {
 
         this.state = {
             nickname: '',
-            toGame: false
+            toGame: false,
+            toWait: false
         }
     }
 
-    changeNickname = (newNickname) => {
+    changeNicknameStart = (newNickname) => {
         this.setState({
             nickname: newNickname,
             toGame: true,
+            toWait: false,
+        });
+    }
+
+    changeNicknameWait = (newNickname) => {
+        this.setState({
+            nickname: newNickname,
+            toWait: true,
         });
     }
 
@@ -35,6 +44,9 @@ class App extends React.Component {
             <Router>
                 {
                     this.state.toGame ? <Redirect to='/game' /> : <React.Fragment /> //if true, redirect, else return a void fragment
+                }
+                {
+                    this.state.toWait ? <Redirect to='/wait' /> : <React.Fragment /> //if true, redirect, else return a void fragment
                 }
                 <div>
                     <Switch>
@@ -58,7 +70,15 @@ class App extends React.Component {
                         <Route path="/connect" >
                             <Connect
                                 nickname={this.state.nickname}
-                                changeNickname={this.changeNickname}
+                                changeNicknameStart={this.changeNicknameStart}
+                                changeNicknameWait={this.changeNicknameWait}
+                            />
+                        </Route>
+
+                        <Route path="/wait" >
+                            <Wait 
+                                nickname={this.state.nickname}
+                                changeNicknameStart={this.changeNicknameStart}
                             />
                         </Route>
 

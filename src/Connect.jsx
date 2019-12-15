@@ -13,18 +13,20 @@ class Connect extends React.Component {
 
     onConnect = (event) => {
         event.preventDefault(); //so that it doesn't refresh
-        axios.create({
-            baseURL: 'http://localhost:3001', //server port
-            })
-            .post('/login',
+        axios.post('http://localhost:3001/login',
                 {
                     nickname: this.state.nickname,
                 },
                 {
                     headers: { 'Content-Type': 'application/json' }
                 })
-            .then(response => {
-                this.props.changeNickname(this.state.nickname);
+            .then(res => {
+                if (res.is){
+                    this.props.changeNicknameStart(this.state.nickname);
+                }
+                else {
+                    this.props.changeNicknameWait(this.state.nickname);
+                }
             })
             .catch(err => {
                 alert("Gno. You cagnnot enter.");
