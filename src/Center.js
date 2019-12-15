@@ -2,7 +2,8 @@ import React from 'react';
 import Game from './Game';
 import Hand from './Hand';
 import "./style/game.css";
-const axios = require('axios');
+import Axios from "./Axios";
+import { changeTurn } from "./utils";
 
 class Center extends React.Component {
 
@@ -12,10 +13,38 @@ class Center extends React.Component {
 			nickname: props.nickname,
 			playerNumber: 0,
 
-			deck: 0,
-			discard: 0,
-			player: {},
-			players: [],
+			deck: [],
+			discard: [],
+			player: {
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			players: [{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},
+			{
+				name: '',
+				creepers: [],
+				keepers: [],
+				hand: [],
+			},],
 			otherPlayers: [{
 				name: '',
 				creepers: [],
@@ -41,8 +70,8 @@ class Center extends React.Component {
 				hand: [],
 			},
 			],
-			draw: 0,
-			maxPlay: 0,
+			draw: {src: "../media/img/draw1.png"},
+			maxPlay: {src: "../media/img/play1.png"},
 			playsLeft: 0,
 			currentPlayer: 0,
 			rules: [],
@@ -53,11 +82,13 @@ class Center extends React.Component {
 			change: false,
 		}
 		this.getGameState();
+		console.log(this.players);
+		changeTurn(this.getGameState);
 	}
 
-	changeZoomCard = function (card) {
-		this.setState({cardToZoom: card});
-	}
+	// changeZoomCard = function (card) {
+	// 	this.setState({cardToZoom: card});
+	// }
 
 	managePlayers = () => {
 		if (this.state.players[0].name == this.state.nickname) {
@@ -77,10 +108,10 @@ class Center extends React.Component {
 			this.setState({playerNumber: 3});
 		}
 
-		if (this.state.players.length() == 2) {
+		if (this.state.players.length == 2) {
 			this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], this.state.nullPlayer, this.state.nullPlayer]});
 		}
-		else if (this.state.players.length() == 3) {
+		else if (this.state.players.length == 3) {
 			if (this.state.playerNumber == 0){
 				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.nullPlayer]});
 			}
@@ -91,7 +122,7 @@ class Center extends React.Component {
 				this.setState({otherPlayers: [this.state.players[0], this.state.players[1], this.state.nullPlayer]});
 			}
 		}
-		else if (this.state.players.length() == 4) {
+		else if (this.state.players.length == 4) {
 			if (this.state.playerNumber == 0){
 				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.players[3]]});
 			}
@@ -111,22 +142,24 @@ class Center extends React.Component {
 		this.setState(newPlayer);
 	}
 
-	getGameState = function () {
-		axios.get('/gamestate')
-		.then( res => {
+	getGameState = async () => {
+		try {
+			const { data } = await Axios.get('/gamestate');
 			this.setState({
-				deck: res.deck,
-				discard: res.discard,
-				players: res.players,
-				draw: res.draw,
-				maxPlay: res.maxPlay,
-				playsLeft: res.playsLeft,
-				currentPlayer: res.currentPlayer,
-				maxKeepers: res.maxKeepers,
-				goal: res.goal,
-				rules: res.rules,
-			}, () => this.managePlayers())
-		})
+					deck: data.deck,
+					discard: data.discard,
+					players: data.players,
+					draw: data.draw,
+					maxPlay: data.play,
+					playsLeft: data.playsLeft,
+					currentPlayer: data.currentPlayer,
+					maxKeepers: data.maxKeepers,
+					goal: data.goal,
+					rules: data.rules,
+				}, () => this.managePlayers());
+		} catch(err) {
+			console.log(err);
+		}
 	}
 
 	//socket that should call getGameState()
@@ -141,11 +174,11 @@ class Center extends React.Component {
 					player = {this.state.player}
 					otherPlayers = {this.state.otherPlayers}
 					gameState={this.state}
-					changeZoomCard={this.changeZoomCard}
+					// changeZoomCard={this.changeZoomCard}
 				/>
 				<Hand 
-					hand={this.player.hand}
-					changeZoomCard={this.changeZoomCard}
+					hand={this.state.player.hand}
+					// changeZoomCard={this.changeZoomCard}
 					player = {this.state.player}
 				/>
       		</div>

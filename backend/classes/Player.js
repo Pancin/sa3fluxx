@@ -6,7 +6,5 @@ module.exports = class Player {
         this.hand = [];
         this.keepers = [];
         this.creepers = []; //aaw man!
-
-        this.game = game;
     }
 };

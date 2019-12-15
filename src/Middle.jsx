@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal } from 'antd';
 import 'antd/dist/antd.css';
-
-const axios = require('axios');
+import Axios from "./Axios";
+import deck from './media/img/deck.png';
 
 class Middle extends React.Component {
 
@@ -16,27 +16,37 @@ class Middle extends React.Component {
 			goal: props.goal,
 			rules: props.rules,
 			cardsN: 0,
+			deckCard: "../cards/deck/deck.png",
 
 			showDiscard: false,
+			protagonist: props.protagonist,
 		}
 	}
 
+	onClick = async (card) => {
+        try {
+			const { data } = await Axios.put('/selectedFieldCard',
+							{
+								player: this.protagonist,
+								selectedCard: card,
+							});
+        } 
+        catch (err) {
+            // 
+        }
+    }
+
 	static getDerivedStateFromProps(props, state) {
 		let newState = {...props};
-		newState.rules = props.rules.map(card => (
-						<img src={card.src} onClick={() => {
-											axios.put('/selectedFieldCard',
-												{
-													player: this.props.player.name,
-													selectedCard: card.src,
-												},
-												{
-													headers: { 'Content-Type': 'application/json' }
-												})
-											}
-										}
-						/>));
-		newState.cardsN = props.deck.map((card, index) => index + 1);
+		newState.rules = props.rules.map(card => (<img src={card} onClick={() => this.onClick(card)}/>));
+		let counter = 0;
+		for (let i = 0; i < props.deck.length; i++) {
+			counter++;
+		}
+		newState.cardsN = counter;
+		if (props.discard.length == 0) {
+			newState.discard = {src: "../src/media/img/deck.png"}
+		}
 		return newState;
 	}
 
@@ -47,19 +57,19 @@ class Middle extends React.Component {
 		return (
 			<div id="middle" className="Middle">
 				<div id="ddg">
-					<div id="draw"><img src={this.draw.src}></img></div>
-					<div id="play"><img src={this.play.src}></img></div>
+					<div id="draw"><img src={this.draw}></img></div>
+					<div id="play"><img src={this.play}></img></div>
 					<div id="void"></div>
-					<div id="discard"><img src={this.state.discard[0].src} onClick={() => this.setState({showDiscard: true})}></img></div>
-					<Modal 
+					<div id="discard"><img src={this.state.discard[0]} onClick={() => this.setState({showDiscard: true})}></img></div>
+					{/* <Modal 
 						onClose = {() => this.setState({showDiscard: false})}
-						visible = {this.state.showDiscard}> {this.discard.map(card => <img src={card.src}/>)} </Modal>
+						visible = {this.state.showDiscard}> {this.state.discard && this.state.discard.map((card, i) => <img key={i} src={card}/>)} </Modal> */}
 					<div id="deckimg">
-						<img src="../media/img/deck.png"></img>
+						<img src={deck}></img>
 						<div id="deck">{this.state.cardsN}</div>
 					</div>
 					<div id="void"></div>
-					<div id="goal"><img src={this.state.goal.src}></img></div>
+					<div id="goal"><img src={this.state.goal}></img></div>
 					<div id="void"></div>
 				</div>
 				<div id="rules">{this.state.rules}</div>

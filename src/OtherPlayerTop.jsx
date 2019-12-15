@@ -1,11 +1,12 @@
 import React from 'react';
-const axios = require('axios');
+import Axios from "./Axios";
 
 class OtherPlayerTop extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			protagonist: props.protagonist,
 			name: props.player.name,
 			creepers: props.player.creepers,
 			keepers: props.player.keepers,
@@ -13,36 +14,30 @@ class OtherPlayerTop extends React.Component {
 		}
 	}
 
+	onClick = async (card) => {
+        try {
+			const { data } = await Axios.put('/selectedFieldCard',
+							{
+								player: this.protagonist,
+								selectedCard: card.src,
+							});
+        } 
+        catch (err) {
+            // 
+        }
+    }
+
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
+		newState.protagonist = props.protagonist;
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(card => (
-							<img src={card.src} onClick={() => {
-												axios.put('/selectedFieldCard',
-													{
-														player: this.props.player.name,
-														selectedCard: card.src,
-													},
-													{
-														headers: { 'Content-Type': 'application/json' }
-													})
-												}
-											}
-							/>));
-		newState.keepers = props.player.keepers.map(card => (
-							<img src={card.src} onClick={() => {
-												axios.put('/selectedFieldCard',
-													{
-														player: this.props.player.name,
-														selectedCard: card.src,
-													},
-													{
-														headers: { 'Content-Type': 'application/json' }
-													})
-												}
-											}
-							/>));
-		newState.cardsN = props.player.hand.map((card, index) => index + 1);
+		newState.creepers = props.player.creepers.map(card => (<img src={card.src} onClick={() => this.onClick(card)}/>));
+		newState.keepers = props.player.keepers.map(card => (<img src={card.src} onClick={() => this.onClick(card)}/>));
+		let counter = 0;
+		for (let i = 0; i < props.player.hand.length; i++) {
+			counter++;
+		}
+		newState.cardsN = counter;
 		return newState;
 	}
 

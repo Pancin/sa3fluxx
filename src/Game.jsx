@@ -10,6 +10,7 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			protagonist: props.player.name,
 			player: props.player,
 			otherPlayers: [ props.otherPlayers[0], //right
 				props.otherPlayers[1], //top
@@ -21,6 +22,7 @@ class Game extends React.Component {
 
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
+		newState.protagonist = props.player.name;
 		newState.player = props.player;
 		newState.otherPlayers = [props.otherPlayers[0], props.otherPlayers[1], props.otherPlayers[2]];
 		newState.gameState = props.gameState;
@@ -32,25 +34,29 @@ class Game extends React.Component {
 		return (
 			<div className="Game" id="game">
 				<OtherPlayerLeft
+					protagonist={this.state.protagonist}
 					player={this.state.otherPlayers[2]}
 				/>
 				<div id="gameCenter">
 					<OtherPlayerTop
+						protagonist={this.state.protagonist}
 						player={this.state.otherPlayers[1]}
 					/>
 					<Middle
-						draw={this.gameState.draw}
-						play={this.gameState.maxPlay}
-						discard={this.gameState.discard}
-						deck={this.gameState.deck}
-						goal={this.gameState.goal}
-						rules={this.gameState.rules}
+						protagonist={this.state.protagonist}
+						draw={this.state.gameState.draw}
+						play={this.state.gameState.maxPlay}
+						discard={this.state.gameState.discard}
+						deck={this.state.gameState.deck}
+						goal={this.state.gameState.goal}
+						rules={this.state.gameState.rules}
 					/>
 					<Player
 						player={this.state.player}
 					/>
 				</div>
 				<OtherPlayerRight
+					protagonist={this.state.protagonist}
 					player={this.state.otherPlayers[0]}
 				/>
 			</div>

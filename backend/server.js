@@ -1,5 +1,6 @@
 var app = require('./app');
 var debug = require('debug');
+const io = require('socket.io')();
 
 const WebSocketServer = require("ws").Server;
 const wss = new WebSocketServer({ port: 9090 });
@@ -17,6 +18,23 @@ wss.on("connection", connection => {
     broadcast(data)
   });
 });
+
+
+io.on("connection", (socket) => {
+  socket.on('turn', (event) => {
+    console.log(event);
+  });
+});
+
+io.listen(3002);
+
+const eventBus = require('./pubsub');
+
+eventBus.on('turn', (event) => {
+  io.emit('turn', event);//notifica ch ec'e stato un cambiamento
+});
+
+
 
 setInterval(cleanUp, 100)
 

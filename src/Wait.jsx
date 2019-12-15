@@ -1,6 +1,6 @@
 import React from 'react';
 import './style/connect.css';
-import axios from 'axios';
+import Axios from "./Axios";
 
 class Wait extends React.Component {
 
@@ -11,18 +11,20 @@ class Wait extends React.Component {
         }
     }
 
-    onConnect = (event) => {
-        event.preventDefault(); //so that it doesn't refresh
-        axios.create({
-            baseURL: 'http://localhost:3001', //server port
-            })
-            .post('/start')
-            .then(res => {
+    onConnect = async (event) => {
+        try {
+            event.preventDefault(); //so that it doesn't refresh
+            const { data } = await Axios.post('/start');
+            if (data.is) {
                 this.props.changeNicknameStart(this.state.nickname);
-            })
-            .catch(err => {
-                alert("There are not enough players yet.");
-            })
+            }
+            else {
+                alert("There are gnot egnough players yet.");
+            }
+        } 
+        catch (err) {
+            alert("Ugnown error.");
+        }
     }
 
     render() {

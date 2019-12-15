@@ -1,5 +1,6 @@
 const fullDeck = require('../deck.js');
 const Player = require("./Player");
+const eventBus = require('../pubsub');
 
 class Game {
 
@@ -23,6 +24,7 @@ class Game {
         this.silverLining = false;
 
         this.is = false;
+        this.getCard = this.getCard.bind(this);
     }
 
     is() {
@@ -30,25 +32,45 @@ class Game {
     }
 
     init() {
+        this.deck = [];
         fullDeck.forEach(card => {
             this.deck.push(card.filename);
         });
     }
 
     startPlay() {
+        this.init();
         if (this.players.length > 1) {
             this.players.forEach(player => {
-                this.draw(3, player);
+                this.drawCard(3, this.players.indexOf(player));
             });
             this.is = true;
         }
         else console.log('no.');
     }
 
+    isAvailable(name) {
+        this.players.forEach(player => {
+            if(name === player.name) return false;
+        });
+        return true;
+    }
+
     newPlayer(name) {
-        //names not unique yet
         this.players.push(new Player(name, this));
         if (this.players.length == 4) this.startPlay();
+    }
+
+    getPlayer(name) {
+        let p;
+        this.players.forEach(player => {
+            if (player.name === name) p = player;
+        });
+        return p;
+    }
+
+    isPlaying(name) {
+        return this.players[this.currentPlayer].name === name;
     }
 
     refillDeck() {
@@ -57,36 +79,59 @@ class Game {
         });
     }
 
-    findCard(cardname) {
+    getCard(cardname) {
+        let c = {
+            name:'error',
+            filename:'error.png',
+            type:'error'
+        };
         fullDeck.forEach(card => {
-            if (cardname == card.filename) return card;
+            // console.log(cardname);
+            // console.log(card.filename);
+            // console.log(card.type);
+            if (cardname == card.filename) {
+                c = card;
+            }
         });
+        return c;
     }
 
     cardType(cardname) {
-        return this.findCard(cardname).type;
+        // console.log('cardType()')
+        // console.log(cardname);
+        return this.getCard(cardname).type;
     }
 
     cardSubType(cardname) {
-        return this.findCard(cardname).SubType
+        return this.getCard(cardname).SubType
     }
 
     containsCard(cardname, array) {
+        let bool = false;
         array.forEach(card => {
-            if (card == cardname) return true;
-        })
+            if (card == cardname) bool = true;
+        });
+        return bool;
     }
 
     cardFromDeck() {
-        let card = this.deck.splice(Math.floor(Math.random() * this.deck.length), 1);
-        if (!this.deck.length) refill();
+        let d = this.deck;
+        let card = d.splice(Math.floor(Math.random() * d.length), 1)[0];
+        // console.log('cardFromDeck()')
+        // console.log(card)
+        if (!d.length) this.refillDeck();
         return card;
     }
 
-    draw(n = 1, player = this.currentPlayer) {
-        let targetPlayer = this.players[player];
+    drawCard(n = 1, playerId = this.currentPlayer) {
+        // console.log(this.players);
+        // console.log(this.currentPlayer);
+        let targetPlayer = this.players[playerId];
+        // console.log(targetPlayer);
         for (let i = 0; i < n; ++i) {
             let card = this.cardFromDeck();
+            // console.log('drawCard()')
+            // console.log(card);
             while (this.cardType(card) == 'creeper') {
                 targetPlayer.creepers.push(card);
                 card = this.cardFromDeck();
@@ -118,13 +163,14 @@ class Game {
 
     removeRuleBySubType(cardname) {
         this.rules.forEach(rulename => {
-            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discard(this.rules.splice(this.rules.indexOf(rulename), 1));
+            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discard(this.rules.splice(this.rules.indexOf(rulename), 1)[0]);
         });
     }
 
     play(cardname, playerId = this.currentPlayer) { //no newRules and Actions for the moment
         if (this.cardType(cardname) == "keeper") {
             this.removeCardFromPlayer(cardname, playerId);
+            // if (player)
             player.keeper.push(cardname);
             this.nextPlay();
         }
@@ -193,46 +239,46 @@ class Game {
 
     playAction(cardname) {
         if (cardname == "jackpot.png") {
-            this.draw(3);
+            this.drawCard(3);
             this.nextPlay();
         }
         else if (cardname == "discAndDraw.png") {
             let discarded = this.removeCardFromPlayer("all");
-            this.draw(discarded);
+            this.drawCard(discarded);
             this.nextPlay();
         }
-        else if (cardname == "exchKeep.png") {
-            // 
-        }
-        else if (cardname == "doItAgain.png") {
-            // 
-        }
-        else if (cardname == "simplify.png") {
-            // 
-        }
+        // else if (cardname == "exchKeep.png") {
+        //     // 
+        // }
+        // else if (cardname == "doItAgain.png") {
+        //     // 
+        // }
+        // else if (cardname == "simplify.png") {
+        //     // 
+        // }
         else if (cardname == "reset.png") {
             this.rules.forEach(card => this.checkAndDiscard(card));
             this.rules = [];
             this.nextPlay();
         }
-        else if (cardname == "otherTurn.png") {
-            // 
-        }
-        else if (cardname == "trashRule.png") {
-            // 
-        }
-        else if (cardname == "creepSweep.png") {
-            // 
-        }
-        else if (cardname == "tashSmth.png") {
-            // 
-        }
-        else if (cardname == "stealSmth.png") {
-            // 
-        }
-        else if (cardname == "mixItUp.png") {
-            // 
-        }
+        // else if (cardname == "otherTurn.png") {
+        //     // 
+        // }
+        // else if (cardname == "trashRule.png") {
+        //     // 
+        // }
+        // else if (cardname == "creepSweep.png") {
+        //     // 
+        // }
+        // else if (cardname == "tashSmth.png") {
+        //     // 
+        // }
+        // else if (cardname == "stealSmth.png") {
+        //     // 
+        // }
+        // else if (cardname == "mixItUp.png") {
+        //     // 
+        // }
     }
 
     modifyDraw(amount) {
@@ -241,7 +287,7 @@ class Game {
             bonusDraw = amount - this.draw;
         }
         this.draw = amount;
-        this.draw(bonusDraw);
+        this.drawCard(bonusDraw);
     }
 
     modifyPlay(amount) {
@@ -284,6 +330,7 @@ class Game {
         ++this.played;
         --this.playLeft;
         if (this.played >= this.maxPlay || !this.players[this.currentPlayer].hand.length) nextTurn();
+        eventBus.emit('turn', undefined);
     }
 
     nextTurn() {
@@ -294,13 +341,14 @@ class Game {
 
     //returns winning player
     checkWin(goalname) {
-        let winCondition = this.findCard(goalname).condition;
+        let winner;
+        let winCondition = this.getCard(goalname).condition;
         if (winCondition['k'] === -1) {
             this.players.forEach(player => {
                 if (this.containsCard(winCondition[0], player.keepers) &&
                     this.containsCard(winCondition[1], player.keepers) &&
                     player.creepers.length === winCondition['c']) 
-                    return player.name;
+                    winner = player.name;
             });
         }
         else if (winCondition['k'] === 1) {
@@ -308,9 +356,10 @@ class Game {
                 if (this.containsCard(winCondition[0], player.keepers) &&
                     player.creepers.length === winCondition['c'] && 
                     player.keepers.length === 1) 
-                    return player.name;
+                    winner = player.name;
             });
         }
+        return winner;
     }
 }
 
