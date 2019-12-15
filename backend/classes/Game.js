@@ -167,47 +167,41 @@ class Game {
     }
 
     playAction(cardname) {
-        if (cardname == "draw2.png") {
+        if (cardname == "jackpot.png") {
             this.modifyDraw(2);
         }
-        else if (cardname == "draw3.png") {
+        else if (cardname == "discAndDraw.png") {
             this.modifyDraw(3);
         }
-        else if (cardname == "draw4.png") {
+        else if (cardname == "exchKeep.png") {
             this.modifyDraw(4);
         }
-        else if (cardname == "draw5.png") {
+        else if (cardname == "doItAgain.png") {
             this.modifyDraw(5);
         }
-        else if (cardname == "play2.png") {
+        else if (cardname == "simplify.png") {
             this.modifyPlay(2);
         }
-        else if (cardname == "play3.png") {
+        else if (cardname == "reset.png") {
             this.modifyPlay(3);
         }
-        else if (cardname == "play4.png") {
+        else if (cardname == "otherTurn.png") {
             this.modifyPlay(4);
         }
-        else if (cardname == "playAll.png") {
+        else if (cardname == "trashRule.png") {
             this.modifyPlay(1000);
         }
-        else if (cardname == "FpRandom.png") {
+        else if (cardname == "creepSweep.png") {
             this.firstRandom = true;
         }
-        else if (cardname == "LpRandom.png") {
+        else if (cardname == "tashSmth.png") {
             this.lastRandom = true;
         }
-        else if (cardname == "nhBonus.png") {
+        else if (cardname == "stealSmth.png") {
             this.noHandBonus = true;
         }
-        else if (cardname == "pBonus.png") {
+        else if (cardname == "mixItUp.png") {
             this.poorBonus = true;
-        }
-        else if (cardname == "rBonus.png") {
-            this.richBonus = true;
-        }
-        else if (cardname == "sLining.png") {
-            this.silverLining = true;
         }
     }
 
