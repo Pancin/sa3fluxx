@@ -13,7 +13,7 @@ class Game {
         this.playLeft = 1;
         this.played = 0;
         this.currentPlayer = 0; //index of this.players
-        this.goal = '';
+        this.goal = 'noGoal.png';
         this.rules = []; // list of cardnames
 
         this.firstRandom = false;

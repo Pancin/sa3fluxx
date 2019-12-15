@@ -35,7 +35,7 @@ let sendJSON = (res, status, obj) => {
 
 function buildCardURI(cardname) {
     // console.log(cardname)
-    return path.join('../cards/deck', Game.cardType(cardname) + 's', cardname);
+    return './' + path.join('./media/deck', Game.cardType(cardname) + 's', cardname);
 }
 // console.log(buildCardURI('money.png'));
 
@@ -80,6 +80,8 @@ function buildGameState() {
         rules: mapCardURI(Game.rules),
         is: Game.is
     }
+    console.log(buildCardURI("draw" + Game.draw + ".png"))
+    console.log(buildCardURI((Game.maxPlay === 1000) ? "playAll.png" : "play" + Game.maxPlay + ".png"))
     // console.log(gamestate.rules);
     // console.log(gamestate.players);
     return gamestate;

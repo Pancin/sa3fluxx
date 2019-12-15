@@ -26,28 +26,6 @@ img.arrow {
     font-size: 16px;
 }
 
-/* IMG HOVER */
-
-/* img:hover {
-    position: absolute;
-    left: 0%;
-    top: 0%;
-    width: 9.5vw;
-    height: initial;
-    min-width: 122px;
-}
-#deckimg img:hover, img.arrow:hover {
-    position: initial;
-    left: initial;
-    top: initial;
-    height: 100px;
-    width: initial;
-    min-width: initial;
-}
-img.arrow:hover {
-    height: 86px;
-} */
-
 /* FLEX, MARGINS AND HEIGHTS */
 
 .App, #game, #leftCards, #topCC, #topCreepers, #topKeepers, #ddg, #rules, #bottomKeepers, #bottomCC, #bottomCreepers, #rightCards, #hand, #handCards {
@@ -209,7 +187,8 @@ img.arrow:hover {
 
 #hand {
     flex-basis: 13.5%;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
 }
 
 #handCards {

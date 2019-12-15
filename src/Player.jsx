@@ -30,8 +30,8 @@ class Player extends React.Component {
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(card => (<img src={card} onClick={() => this.onClick(card)}/>));
-		newState.keepers = props.player.keepers.map(card => (<img src={card} onClick={() => this.onClick(card)}/>));
+		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
+		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
 		newState.cardsN = props.player.hand.map((card, index) => index + 1);
 		return newState;
 	}

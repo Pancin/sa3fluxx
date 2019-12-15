@@ -19,7 +19,7 @@ class OtherPlayerTop extends React.Component {
 			const { data } = await Axios.put('/selectedFieldCard',
 							{
 								player: this.protagonist,
-								selectedCard: card.src,
+								selectedCard: card,
 							});
         } 
         catch (err) {
@@ -31,8 +31,8 @@ class OtherPlayerTop extends React.Component {
 		let newState = {};
 		newState.protagonist = props.protagonist;
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(card => (<img src={card.src} onClick={() => this.onClick(card)}/>));
-		newState.keepers = props.player.keepers.map(card => (<img src={card.src} onClick={() => this.onClick(card)}/>));
+		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
+		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
 		let counter = 0;
 		for (let i = 0; i < props.player.hand.length; i++) {
 			counter++;
