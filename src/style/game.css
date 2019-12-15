@@ -189,10 +189,15 @@ img.arrow {
     flex-basis: 13.5%;
     justify-content: center;
     align-content: center;
+    align-items: center;
 }
 
 #handCards {
     align-content: center;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw;
+    overflow: scroll;
 }
 
 #void {

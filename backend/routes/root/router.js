@@ -37,7 +37,7 @@ function buildCardURI(cardname) {
     // console.log(cardname)
     return './' + path.join('./media/deck', Game.cardType(cardname) + 's', cardname);
 }
-// console.log(buildCardURI('money.png'));
+// console.log(buildCardURI('noGoal.png'));
 
 function mapCardURI(array) {
     if (array === []) return [];
@@ -76,18 +76,19 @@ function buildGameState() {
         maxPlay: buildCardURI((Game.maxPlay === 1000) ? "playAll.png" : "play" + Game.maxPlay + ".png"),
         playLeft: Game.playLeft,
         currentPlayer: Game.currentPlayer,
-        goal: Game.goal,
+        goal: buildCardURI(Game.goal),
         rules: mapCardURI(Game.rules),
         is: Game.is
     }
-    console.log(buildCardURI("draw" + Game.draw + ".png"))
-    console.log(buildCardURI((Game.maxPlay === 1000) ? "playAll.png" : "play" + Game.maxPlay + ".png"))
+    // console.log(gamestate.maxPlay);
+    // console.log(gamestate.draw);
     // console.log(gamestate.rules);
     // console.log(gamestate.players);
     return gamestate;
 }
 
 router.post('/login', (req, res) => {
+    console.log(req.body.nickname);
     if (!req.body.nickname) sendJSON(res, 400, { is: Game.is });
     else if (Game.is || !Game.isAvailable(req.body.nickname)) sendJSON(res, 403, { is: Game.is });
     else {
@@ -114,9 +115,13 @@ router.get('/gamestate', (req, res) => {
 router.post('/selectedHandCard', (req, res) => {
     // player -> controllare se è l'active player
     // selectedCard -> se lo è, chiamare la funzione Play con selectedCard
-    cardname = path.basename(req.body.selectedCard);
-    if(!Game.isPlaying(req.body.player) || !Game.containsCard(cardname, Game.getPlayer(player))) res.sendStatus(403);
-    else play(cardname);
+    console.log("Entered selected hand card");
+    let cardname = path.basename(req.body.selectedCard);
+    if(!Game.isPlaying(req.body.player) || !Game.containsCard(cardname, Game.getPlayer(req.body.player).hand)) res.sendStatus(403);
+    else {
+        Game.play(cardname);
+        res.sendStatus(200);
+    }
 });
 
 router.post('/selectedFieldCard', (req, res) => {

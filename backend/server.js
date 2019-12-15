@@ -31,7 +31,7 @@ io.listen(3002);
 const eventBus = require('./pubsub');
 
 eventBus.on('turn', (event) => {
-  io.emit('turn', event);//notifica ch ec'e stato un cambiamento
+  io.emit('turn', event);
 });
 
 

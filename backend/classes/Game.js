@@ -45,6 +45,7 @@ class Game {
                 this.drawCard(3, this.players.indexOf(player));
             });
             this.is = true;
+            this.beginTurn();
         }
         else console.log('no.');
     }
@@ -168,10 +169,16 @@ class Game {
     }
 
     play(cardname, playerId = this.currentPlayer) { //no newRules and Actions for the moment
+        let player = this.players[playerId];
         if (this.cardType(cardname) == "keeper") {
+            console.log("Entered Keepers");
             this.removeCardFromPlayer(cardname, playerId);
-            // if (player)
-            player.keeper.push(cardname);
+            if (player.keepers.length === 9) {
+                this.discard(cardname);
+            }
+            else {
+                player.keepers.push(cardname);
+            }
             this.nextPlay();
         }
         else if (this.cardType(cardname) == "goal") {
@@ -312,12 +319,6 @@ class Game {
         else if (cardname == "nhBonus.png") {
             this.noHandBonus = false;
         }
-        else if (cardname == "pBonus.png") {
-            this.poorBonus = false;
-        }
-        else if (cardname == "rBonus.png") {
-            this.richBonus = false;
-        }
         else if (cardname == "sLining.png") {
             this.silverLining = false;
         }
@@ -326,28 +327,48 @@ class Game {
     }
 
     nextPlay() {
+        console.log("Action ended");
         this.checkWin();
         ++this.played;
         --this.playLeft;
-        if (this.played >= this.maxPlay || !this.players[this.currentPlayer].hand.length) nextTurn();
+        if (this.played >= this.maxPlay || !this.players[this.currentPlayer].hand.length) this.nextTurn();
         eventBus.emit('turn', undefined);
+        // if (this.playLeft === 1 && this.lastRandom) {
+        //     this.play();
+        // }
+
     }
 
     nextTurn() {
         this.played = 0;
         this.playLeft = this.maxPlay;
         (++this.currentPlayer) % this.players.length;
+        this.beginTurn();
     }
 
-    //returns winning player
+    beginTurn() {
+        if (this.noHandBonus) {
+            this.drawCard(3);
+        }
+        this.drawCard(this.draw);
+
+        // if (this.firstRandom) {
+        //     this.play();
+        // }
+    }
+
+    //returns winning player name
     checkWin(goalname) {
+        console.log("Check win");
         let winner;
         let winCondition = this.getCard(goalname).condition;
         if (winCondition['k'] === -1) {
             this.players.forEach(player => {
+                console.log(player);
+                console.log(player.keepers);
                 if (this.containsCard(winCondition[0], player.keepers) &&
                     this.containsCard(winCondition[1], player.keepers) &&
-                    player.creepers.length === winCondition['c']) 
+                    (player.creepers.length === winCondition['c'] || this.silverLining)) 
                     winner = player.name;
             });
         }

@@ -10,7 +10,7 @@ class Player extends React.Component {
 			creepers: props.player.creepers,
 			keepers: props.player.keepers,
 			cardsN: 0,
-			playsLeft: 10,
+			playsLeft: props.playsLeft,
 		}
 	}
 
@@ -33,6 +33,7 @@ class Player extends React.Component {
 		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
 		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
 		newState.cardsN = props.player.hand.map((card, index) => index + 1);
+		newState.playsLeft = props.playsLeft;
 		return newState;
 	}
 

@@ -44,7 +44,7 @@ class Middle extends React.Component {
 		}
 		newState.cardsN = counter;
 		if (props.discard.length == 0) {
-			newState.discard = ["./media/img/deck.png"]
+			newState.discard = ["./media/img/noDiscard.png"]
 		}
 		return newState;
 	}

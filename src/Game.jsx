@@ -53,6 +53,7 @@ class Game extends React.Component {
 					/>
 					<Player
 						player={this.state.player}
+						playsLeft={this.state.gameState.playsLeft}
 					/>
 				</div>
 				<OtherPlayerRight

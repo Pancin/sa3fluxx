@@ -8,15 +8,16 @@ class Hand extends React.Component {
 		this.state = {
 			player: props.player,
 			hand: [],
+			onClick: this.onClick,
 		}
-		// this.onClick = this.onClick.bind(this);
 	}
 
 	onClick = async (card) => {
         try {
-			const { data } = await Axios.put('/selectedHandCard',
+			console.log("Call server");
+			const { data } = await Axios.post('/selectedHandCard',
 							{
-								player: this.player.name,
+								player: this.state.player.name,
 								selectedCard: card,
 							});
         } 
@@ -24,15 +25,11 @@ class Hand extends React.Component {
             // 
         }
 	}
-	
-	componentDidUpdate(oldProps) {
-		this.state.hand = this.state.hand.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
-	}
 
 	static getDerivedStateFromProps(props, state) {
 		return {
 			player: props.player,
-			hand: props.hand,
+			hand: props.hand.map(card => (<img src={require('' + card + '')} onClick={() => state.onClick(card)}/>)),
 		};
 	}
 
