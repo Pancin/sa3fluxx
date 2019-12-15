@@ -32,11 +32,11 @@ class Game extends React.Component {
 		return (
 			<div className="Game" id="game">
 				<OtherPlayerLeft
-					player={this.state.otherPlayer[2]}
+					player={this.state.otherPlayers[2]}
 				/>
 				<div id="gameCenter">
 					<OtherPlayerTop
-						player={this.state.otherPlayer[1]}
+						player={this.state.otherPlayers[1]}
 					/>
 					<Middle
 						draw={this.gameState.draw}
@@ -51,7 +51,7 @@ class Game extends React.Component {
 					/>
 				</div>
 				<OtherPlayerRight
-					player={this.state.otherPlayer[0]}
+					player={this.state.otherPlayers[0]}
 				/>
 			</div>
 		);

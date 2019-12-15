@@ -38,8 +38,9 @@ class Wait extends React.Component {
 
                 <main>
                     <div>Waiting for other palyers</div>
+                    <br/>
                     <form onSubmit={this.onConnect}>
-                        <input type="submit">Start Game</input>
+                        <input type="submit" value="Start Game"/>
                     </form>
                 </main>
             </div>

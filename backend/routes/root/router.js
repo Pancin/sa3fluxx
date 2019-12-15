@@ -20,13 +20,11 @@ let sendJSON = (res, status, obj) => {
 }
 
 router.post('/login', (req, res) => {
-    console.log(req);
-    if (Game.is()) res.sendStatus(403);
+    if (Game.is) res.sendStatus(403);
     else {
         Game.newPlayer(req.body.nickname);
-        res.sendStatus(201);
+        sendJSON(res, 201, {is:Game.is});
     }
-
 });
 
 router.post('/selectedHandCard', (req, res) => {

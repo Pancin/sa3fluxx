@@ -1,4 +1,6 @@
-class Player {
+'use strict';
+
+module.exports = class Player {
     constructor(name, game) {
         this.name = name;
         this.hand = [];
@@ -7,4 +9,4 @@ class Player {
 
         this.game = game;
     }
-}
+};

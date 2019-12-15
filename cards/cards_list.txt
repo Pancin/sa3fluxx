@@ -23,14 +23,13 @@ Creepers (3 cards):
     Death
     Taxes
 
-Goals (22 cards):
+Goals (21 cards):
     All You Need is Love [ONLY Love]
     Appliances [Television + Toaster]
     Baked Goods [Bread + Cookies]
     Bed Time [Time + Sleep]
     Chocolate Cookies [Chocolate + Cookies]
     Chocolate Milk [Chocolate + Milk]
-    Death by Chocolate [Death + Cholocate]
     Dreamland [Dreams + Sleep]
     Hearts and Minds [Love and Brain]
     Hippyism [Love + Peace]
@@ -77,7 +76,7 @@ New Rules (14 cards):
     Rich Bonus
     Silver Lining
 
-Total cards: 69
+Total cards: 68
 
 
 Additional Cards:
@@ -87,6 +86,7 @@ Additional Cards:
     GOAL: 10 Cards in Hand 
     GOAL: Brain (no TV) [Brain and no Television ON THE TABLE]
     GOAL: Peace (no War) [Peace and no War ON THE TABLE]
+    GOAL: Death by Chocolate [Death + Cholocate]
     GOAL: War = Death [War + Death]
     GOAL: All That Is Certain [Death + Taxes]
     GOAL: Party Snacks [Party + (Cookies OR Chocolate OR Bread)]

@@ -13,11 +13,12 @@ body{
 
 
 /* BACKGROUNDS */
-body.index{
+div.firstBackground{
     background-image: url("../media/img/indexBackground.jpg");
     height: 100vh;
     width: 100%;
-    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: cover;
     background-position: center; 
 }
 /* END OF BACKGROUNDS */
@@ -29,7 +30,7 @@ div.firstBackground{
 }
 
 div.secondBackground {
-    background-image: url("../media/img/black.jpeg");
+    background-image: url("../media/img/secondBackground.jpg");
     background-attachment: scroll;
     background-size: cover;
     height: 100vh;

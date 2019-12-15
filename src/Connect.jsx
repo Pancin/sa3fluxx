@@ -1,6 +1,6 @@
 import React from 'react';
 import './style/connect.css';
-import axios from 'axios';
+import Axios from "./Axios";
 
 class Connect extends React.Component {
 
@@ -11,26 +11,20 @@ class Connect extends React.Component {
         }
     }
 
-    onConnect = (event) => {
-        event.preventDefault(); //so that it doesn't refresh
-        axios.post('http://localhost:3001/login',
-                {
-                    nickname: this.state.nickname,
-                },
-                {
-                    headers: { 'Content-Type': 'application/json' }
-                })
-            .then(res => {
-                if (res.is){
-                    this.props.changeNicknameStart(this.state.nickname);
-                }
-                else {
-                    this.props.changeNicknameWait(this.state.nickname);
-                }
-            })
-            .catch(err => {
-                alert("Gno. You cagnnot enter.");
-            })
+    onConnect = async (event) => {
+        try {
+            event.preventDefault(); //so that it doesn't refresh
+            const { data } = await Axios.post('/login', {nickname: this.state.nickname});
+            if (data.is) {
+                this.props.changeNicknameStart(this.state.nickname);
+            }
+            else {
+                this.props.changeNicknameWait(this.state.nickname);
+            }
+        } 
+        catch (err) {
+            alert("Gno. You cagnnot enter.");
+        }
     }
 
     handleChange = (event) => {

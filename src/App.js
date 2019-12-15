@@ -4,6 +4,7 @@ import GameChat from './GameChat';
 import Connect from './Connect';
 import Info from './Info';
 import Home from './Home';
+import Wait from './Wait';
 import {
     BrowserRouter as Router,
     Switch,

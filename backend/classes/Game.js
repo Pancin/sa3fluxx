@@ -1,17 +1,19 @@
 const fullDeck = require('../deck.js');
+const Player = require("./Player");
+
 class Game {
 
     constructor() {
-        this.players = [];
-        this.deck = [];
-        this.discard = [];
+        this.players = []; // list of player Objects
+        this.deck = []; // list of cardnames
+        this.discard = []; // list of cardnames
         this.draw = 1;
         this.maxPlay = 1;
         this.playLeft = 1;
         this.played = 0;
         this.currentPlayer = 0; //index of this.players
         this.goal = '';
-        this.rules = [];
+        this.rules = []; // list of cardnames
 
         this.firstRandom = false;
         this.lastRandom = false;
@@ -44,6 +46,7 @@ class Game {
     }
 
     newPlayer(name) {
+        //names not unique yet
         this.players.push(new Player(name, this));
         if (this.players.length == 4) this.startPlay();
     }
@@ -57,7 +60,7 @@ class Game {
     findCard(cardname) {
         fullDeck.forEach(card => {
             if (cardname == card.filename) return card;
-        })
+        });
     }
 
     cardType(cardname) {
@@ -66,6 +69,12 @@ class Game {
 
     cardSubType(cardname) {
         return this.findCard(cardname).SubType
+    }
+
+    containsCard(cardname, array) {
+        array.forEach(card => {
+            if (card == cardname) return true;
+        })
     }
 
     cardFromDeck() {
@@ -86,14 +95,30 @@ class Game {
         }
     }
 
+    discard(cardname) {
+        this.discard.push(cardname);
+    }
+
     removeCardFromPlayer(cardname, playerId = this.currentPlayer) {
         let player = this.players[playerId];
-        player.hand.splice(player.hand.indexOf(cardname), 1);
+        let handLength = player.hand.length;
+        if (cardname == "all") {
+            player.hand.forEach(card => this.discard(card));
+            player.hand = [];
+        }
+        else {
+            player.hand.splice(player.hand.indexOf(cardname), 1);
+        }
+        return handLength;
+    }
+
+    getCardFromRules(cardname) {
+
     }
 
     removeRuleBySubType(cardname) {
         this.rules.forEach(rulename => {
-            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discard.push(this.rules.splice(this.rules.indexOf(rulename), 1));
+            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discard(this.rules.splice(this.rules.indexOf(rulename), 1));
         });
     }
 
@@ -168,40 +193,45 @@ class Game {
 
     playAction(cardname) {
         if (cardname == "jackpot.png") {
-            this.modifyDraw(2);
+            this.draw(3);
+            this.nextPlay();
         }
         else if (cardname == "discAndDraw.png") {
-            this.modifyDraw(3);
+            let discarded = this.removeCardFromPlayer("all");
+            this.draw(discarded);
+            this.nextPlay();
         }
         else if (cardname == "exchKeep.png") {
-            this.modifyDraw(4);
+            // 
         }
         else if (cardname == "doItAgain.png") {
-            this.modifyDraw(5);
+            // 
         }
         else if (cardname == "simplify.png") {
-            this.modifyPlay(2);
+            // 
         }
         else if (cardname == "reset.png") {
-            this.modifyPlay(3);
+            this.rules.forEach(card => this.checkAndDiscard(card));
+            this.rules = [];
+            this.nextPlay();
         }
         else if (cardname == "otherTurn.png") {
-            this.modifyPlay(4);
+            // 
         }
         else if (cardname == "trashRule.png") {
-            this.modifyPlay(1000);
+            // 
         }
         else if (cardname == "creepSweep.png") {
-            this.firstRandom = true;
+            // 
         }
         else if (cardname == "tashSmth.png") {
-            this.lastRandom = true;
+            // 
         }
         else if (cardname == "stealSmth.png") {
-            this.noHandBonus = true;
+            // 
         }
         else if (cardname == "mixItUp.png") {
-            this.poorBonus = true;
+            // 
         }
     }
 
@@ -219,6 +249,36 @@ class Game {
         this.playLeft = this.maxPlay - this.played;
     }
 
+    checkAndDiscard(cardname) {
+        if (cardname == "draw2.png" || cardname == "draw3.png" || cardname == "draw4.png" || cardname == "draw5.png") {
+            this.modifyDraw(1);
+
+        }
+        else if (cardname == "play2.png" || cardname == "play3.png" || cardname == "play4.png" || cardname == "playAll.png") {
+            this.modifyPlay(1);
+        }
+        else if (cardname == "FpRandom.png") {
+            this.firstRandom = false;
+        }
+        else if (cardname == "LpRandom.png") {
+            this.lastRandom = false;
+        }
+        else if (cardname == "nhBonus.png") {
+            this.noHandBonus = false;
+        }
+        else if (cardname == "pBonus.png") {
+            this.poorBonus = false;
+        }
+        else if (cardname == "rBonus.png") {
+            this.richBonus = false;
+        }
+        else if (cardname == "sLining.png") {
+            this.silverLining = false;
+        }
+
+        this.discard(cardname);
+    }
+
     nextPlay() {
         this.checkWin();
         ++this.played;
@@ -232,7 +292,27 @@ class Game {
         (++this.currentPlayer) % this.players.length;
     }
 
+    //returns winning player
     checkWin(goalname) {
-        this.findCard(goalname).checkWin();
+        let winCondition = this.findCard(goalname).condition;
+        if (winCondition['k'] === -1) {
+            this.players.forEach(player => {
+                if (this.containsCard(winCondition[0], player.keepers) &&
+                    this.containsCard(winCondition[1], player.keepers) &&
+                    player.creepers.length === winCondition['c']) 
+                    return player.name;
+            });
+        }
+        else if (winCondition['k'] === 1) {
+            this.players.forEach(player => {
+                if (this.containsCard(winCondition[0], player.keepers) &&
+                    player.creepers.length === winCondition['c'] && 
+                    player.keepers.length === 1) 
+                    return player.name;
+            });
+        }
     }
 }
+
+const game = new Game();
+module.exports = game;
