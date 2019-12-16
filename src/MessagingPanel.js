@@ -7,7 +7,8 @@ class MessagingPanel extends Component {
     messages: []
   };
 
-  connection = new WebSocket("ws://localhost:9090/");
+  // connection = new WebSocket("ws://localhost:9090/");
+  connection = new WebSocket("ws://10.62.163.212:9090/");
 
   componentDidMount() {
 

@@ -4,7 +4,7 @@ const io = require('socket.io')();
 
 const WebSocketServer = require("ws").Server;
 const wss = new WebSocketServer({ port: 9090 });
-
+// 10.62.163.212
 let clients = [];
 
 wss.on("connection", connection => {

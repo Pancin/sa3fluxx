@@ -11,7 +11,8 @@ class Log extends React.Component {
 		this.state = {
 			log: [],
 		}
- 		this.socket = openSocket('http://localhost:3002');
+ 		// this.socket = openSocket('http://localhost:3002');
+ 		this.socket = openSocket('http://10.62.163.212:3002');
         this.socket.on('turn', this.getLog);
 	}
 
