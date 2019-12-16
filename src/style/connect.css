@@ -69,3 +69,10 @@ input{
 button {
     font-size: 120%;
 }
+
+.bigWin {
+    position: center;
+    font-size: 100px;
+    color: red;
+    /* padding-left: 25%; */
+}

@@ -1,6 +1,6 @@
 import React from 'react';
-import './style/connect.css';
 import Axios from "./Axios";
+import './style/connect.css';
 
 class Win extends React.Component {
 
@@ -14,11 +14,25 @@ class Win extends React.Component {
         //
     }
 
+    static getDerivedStateFromProps(props, state) {
+		return {winner: props.winner};
+	}
+
     render() {
-        console.log("ciaoooooo")
+        console.log(this.state.winner)
         return (
-            <div className="bigWin">
-                {this.state.winner} WON!!
+            <div className="connect-container">
+                <div id="sidenav">
+                    <div className="container">
+                        <a href="/"><div className="nav">Homepage</div></a>
+                        <a href="/info"><div className="nav">Info</div></a>
+                        <a href="/connect" id="active"><div className="nav">Play</div></a>
+                    </div>
+                </div>
+
+                <main>
+                    <div className="bigWin">Player {this.state.winner} won</div>
+                </main>
             </div>
         );
     }

@@ -294,6 +294,7 @@ div#log {
 }
 
 .bigWin{
+    background-color: green;
     font-size: 400px;
     color: red;
 }
