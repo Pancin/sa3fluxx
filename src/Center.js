@@ -3,7 +3,7 @@ import Game from './Game';
 import Hand from './Hand';
 import "./style/game.css";
 import Axios from "./Axios";
-import { changeTurn } from "./utils";
+import { changeTurn, onWin } from "./utils";
 import openSocket from 'socket.io-client';
 
 class Center extends React.Component {
@@ -85,8 +85,7 @@ class Center extends React.Component {
 		this.getGameState();
 		console.log(this.players);
 		changeTurn(this.getGameState);
-		this.socket = openSocket('http://localhost:3002');
-		this.socket.on('action', this.getGameState)
+		onWin(this.getWinner);
 	}
 
 	managePlayers = () => {
@@ -139,6 +138,17 @@ class Center extends React.Component {
 					rules: data.rules,
 				}, () => this.managePlayers());
 		} catch(err) {
+			console.log(err);
+		}
+	}
+
+	getWinner = async () => {
+		try {
+			const { data } = await Axios.get('/win');
+			console.log(data);
+			this.props.toWinner(data.winner);
+		}
+		catch(err) {
 			console.log(err);
 		}
 	}

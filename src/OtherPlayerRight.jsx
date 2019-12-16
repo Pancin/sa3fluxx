@@ -26,11 +26,6 @@ class OtherPlayerRight extends React.Component {
             // 
         }
 	}
-	
-	// componentDidUpdate(oldProps) {
-	// 	this.state.creepers = this.state.creepers
-	// 	this.state.keepers = this.state.keepers
-	// }
 
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};

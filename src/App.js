@@ -5,6 +5,8 @@ import Connect from './Connect';
 import Info from './Info';
 import Home from './Home';
 import Wait from './Wait';
+import Log from './Log';
+import Win from './Win';
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,8 +21,10 @@ class App extends React.Component {
 
         this.state = {
             nickname: '',
+            winner: '',
             toGame: false,
-            toWait: false
+            toWait: false,
+            toWin: false,
         }
     }
 
@@ -39,6 +43,15 @@ class App extends React.Component {
         });
     }
 
+    toWinner = (winner) => {
+        this.setState({
+            winner: winner,
+            toWinner: true,
+            toGame: false,
+            toWait: false,
+        });
+    }
+
     render() {
         return (
             <Router>
@@ -47,6 +60,9 @@ class App extends React.Component {
                 }
                 {
                     this.state.toWait ? <Redirect to='/wait' /> : <React.Fragment /> //if true, redirect, else return a void fragment
+                }
+                {
+                    this.state.toWin ? <Redirect to='/winner' /> : <React.Fragment /> //if true, redirect, else return a void fragment
                 }
                 <div>
                     <Switch>
@@ -58,9 +74,12 @@ class App extends React.Component {
                                         <a href="/info"><div className="nav">Info</div></a>
                                         <a href="/connect" id="active"><div className="nav">Play</div></a>
                                     </div>
-                                    <div id="log"></div>
+                                    <div id="log"><Log /></div>
                                 </div>
-                                <Center nickname={this.state.nickname} />
+                                <Center 
+                                    nickname={this.state.nickname}
+                                    toWinner={this.toWinner} 
+                                />
                                 <div id="right">
                                     <GameChat nickname={this.state.nickname} />
                                 </div>
@@ -84,6 +103,12 @@ class App extends React.Component {
 
                         <Route path="/info">
                             <Info />
+                        </Route>
+
+                        <Route path="/winner">
+                            <Win 
+                                winner={this.state.winner}
+                            />
                         </Route>
 
                         <Route path="/">

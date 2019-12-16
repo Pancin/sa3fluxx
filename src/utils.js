@@ -5,12 +5,14 @@ export function changeTurn(cb) {
     socket.on('turn', cb);
 }
 
-export function startGame(cb) {
+export function startGame(startCb) {
     socket.on("game.start", () => { 
-        cb()
-    });
-    socket.on("win", (event) => {
-        console.log("WIN");
+        startCb()
     });
 }
 
+export function onWin(winCb) {
+    socket.on("win", (event) => {
+        winCb();
+    });
+}

@@ -20,11 +20,9 @@ img.arrow{
     text-align: left;
     font-size: 16px;
 }
-
-
 /* FLEX, MARGINS AND HEIGHTS */
 html {
-    min-height: 100%;
+    max-height: 100vh;
     height: 100%;
 }
 body{
@@ -57,9 +55,9 @@ body{
     min-height: 21%;
     justify-content: space-evenly;
 }
-#log {
+/* #log {
     flex-basis: 79%;
-}
+} */
 #game {
     display: flex;
     flex-direction: row;
@@ -284,6 +282,20 @@ body{
 #bRight, #bLeft {
     display: flex;
     align-items: center;
+}
+div#log {
+    height: 79vh;
+    overflow: scroll;
+}
+.actualLog{
+    height: 79vh;
+    max-height: 79vh;
+    overflow: scroll;
+}
+
+.bigWin{
+    font-size: 400px;
+    color: red;
 }
 
 /* LITTLE RESSPONSITIVITY */

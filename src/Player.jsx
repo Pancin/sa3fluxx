@@ -42,14 +42,16 @@ class Player extends React.Component {
 	}
 
 	render() {
-		const { keepers, name, creepers  } = this.state;
+		const { keepers, name, creepers } = this.state;
+		console.log(this.props.currentPlayer)
 		return (
 			<div id="bottom" className="playerBottom">
 				<div id="bottomKeepers">{keepers}</div>
 				<div id="bottomCC"> 
 					<div id="bottomName">{name}</div>
 					<div id="bottomCreepers">{creepers}</div> 
-					<div id="playsLeft">{this.props.currentPlayer.name === name ? `Plays left: ${this.state.playsLeft}` : 'Not Your Turn'}</div>
+					<div id="playsLeft">{this.props.currentPlayer.name === name ? `Your turn` : 'Not your turn'}</div>
+					<div id="playsLeft">{`Plays left: ${this.state.playsLeft}`}</div>
 				</div>
 			</div>
 		);

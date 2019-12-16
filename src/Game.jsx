@@ -4,6 +4,7 @@ import OtherPlayerLeft from './OtherPlayerLeft';
 import OtherPlayerTop from './OtherPlayerTop';
 import OtherPlayerRight from './OtherPlayerRight';
 import Middle from './Middle';
+import Log from './Log';
 
 class Game extends React.Component {
 
@@ -31,7 +32,7 @@ class Game extends React.Component {
 	}
 
 	render() {
-
+		console.log(this.state)
 		return (
 			<div className="Game" id="game">
 				<OtherPlayerLeft
@@ -55,7 +56,7 @@ class Game extends React.Component {
 					<Player
 						player={this.state.player}
 						playsLeft={this.state.gameState.playsLeft}
-						currentPlayer={this.state.gameState.currentPlayer}
+						currentPlayer={this.state.gameState.players[this.state.gameState.currentPlayer]}
 					/>
 				</div>
 				<OtherPlayerRight

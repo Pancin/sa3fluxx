@@ -176,76 +176,87 @@ const deck =
             filename: "draw2.png",
             dataURL: "",
             description: "Draw 2 cards",
-            type: "rule"
+            type: "rule",
+            subType: "draw"
         },
         {
             name: "Draw 3",
             filename: "draw3.png",
             dataURL: "",
             description: "Draw 3 cards",
-            type: "rule"
+            type: "rule",
+            subType: "draw"
         },
         {
             name: "Draw 4",
             filename: "draw4.png",
             dataURL: "",
             description: "Draw 4 cards",
-            type: "rule"
+            type: "rule",
+            subType: "draw"
         },
         {
             name: "Draw 5",
             filename: "draw5.png",
             dataURL: "",
             description: "Draw 5 cards",
-            type: "rule"
+            type: "rule",
+            subType: "draw"
         },
         {
             name: "No-Hand Bonus",
             filename: "nhBonus.png",
             dataURL: "",
             description: "Draw 3 cards more if you have no cards in your hands",
-            type: "rule"
+            type: "rule",
+            subType: "nhBonus"
         },
         {
             name: "Play 2",
             filename: "play2.png",
             dataURL: "",
             description: "Play 2 cards",
-            type: "rule"
+            type: "rule",
+            subType: "play"
         },
         {
             name: "Play 3",
             filename: "play3.png",
             dataURL: "",
             description: "Play 3 cards",
-            type: "rule"
+            type: "rule",
+            subType: "play"
         },
         {
             name: "Play 4",
             filename: "play4.png",
             dataURL: "",
             description: "Play 4 cards",
-            type: "rule"
+            type: "rule",
+            subType: "play"
         },
         {
             name: "Play All",
             filename: "playAll.png",
             dataURL: "",
             description: "Play all cards in your hand",
-            type: "rule"
+            type: "rule",
+            subType: "play"
         },
         {
             name: "Silver Lining",
             filename: "sLining.png",
             dataURL: "",
             description: "Creepers do not prevent victory",
-            type: "rule"
+            type: "rule",
+            subType: "sLining"
         },
         {
             name: "All You Need Is Love",
             filename: "allLove.png",
             dataURL: "",
             description: "Player with love on the table wins",
+            condition: {0:"love.png", k: 1, c: 0},
             type: "goal"
         },
         {
@@ -253,6 +264,7 @@ const deck =
             filename: "appliances.png",
             dataURL: "",
             description: "Player with Television and Toaster wins",
+            condition: {0:"tv.png", 1: "toaster.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -260,6 +272,7 @@ const deck =
             filename: "bakedGoods.png",
             dataURL: "",
             description: "Player with Bread and Cookies wins",
+            condition: {0:"bread.png", 1: "cookie.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -267,6 +280,7 @@ const deck =
             filename: "bedTime.png",
             dataURL: "",
             description: "Player with Time and Sleep wins",
+            condition: {0:"time.png", 1: "sleep.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -274,6 +288,7 @@ const deck =
             filename: "chcocCookies.png",
             dataURL: "",
             description: "Player with Chocolate and Cookies wins",
+            condition: {0:"chocolate.png", 1: "cookie.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -281,6 +296,7 @@ const deck =
             filename: "chocMilk.png",
             dataURL: "",
             description: "Player with Chocolate and Milk wins",
+            condition: {0:"chocolate.png", 1: "milk.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -288,6 +304,7 @@ const deck =
             filename: "dough.png",
             dataURL: "",
             description: "Player with Bread and Money wins",
+            condition: {0:"bread.png", 1: "money.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -295,6 +312,7 @@ const deck =
             filename: "dreamland.png",
             dataURL: "",
             description: "Player with Dreams and Sleep wins",
+            condition: {0:"dreams.png", 1: "sleep.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -302,6 +320,7 @@ const deck =
             filename: "heartsMinds.png",
             dataURL: "",
             description: "Player with Love and Brain wins",
+            condition: {0:"love.png", 1: "brain.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -309,6 +328,7 @@ const deck =
             filename: "hippyism.png",
             dataURL: "",
             description: "Player with Love and Peace wins",
+            condition: {0:"love.png", 1: "peace.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -316,6 +336,7 @@ const deck =
             filename: "interstellar.png",
             dataURL: "",
             description: "Player with Rocket and Cosmos wins",
+            condition: {0:"rocket.png", 1: "cosmos.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -323,6 +344,7 @@ const deck =
             filename: "lottery.png",
             dataURL: "",
             description: "Player with Dreams and Money wins",
+            condition: {0:"dreams.png", 1: "money.png", k: -1, c: 0},
             type: "goal"
         },
         {
@@ -330,63 +352,72 @@ const deck =
             filename: "meltChoc.png",
             dataURL: "",
             description: "Player with Sun and Chocolate wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"sun.png", 1: "chocolate.png", k: -1, c: 0}
         },
         {
             name: "Milk and Cookies",
             filename: "milkCookies.png",
             dataURL: "",
             description: "Player with Milk and Cookies wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"milk.png", 1: "cookie.png", k: -1, c: 0}
         },
         {
             name: "Mind's Eye",
             filename: "mindEye.png",
             dataURL: "",
             description: "Player with Brain and Eye wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"brain.png", 1: "eye.png", k: -1, c: 0}
         },
         {
             name: "Night and Day",
             filename: "nightDay.png",
             dataURL: "",
             description: "Player with Sun and Moon wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"sun.png", 1: "moon.png", k: -1, c: 0}
         },
         {
             name: "Rocket to the Moon",
             filename: "rocketMoon.png",
             dataURL: "",
             description: "Player with Rocket and Moon wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"rocket.png", 1: "moon.png", k: -1, c: 0}
         },
         {
             name: "Rocket Science",
             filename: "rocketSci.png",
             dataURL: "",
             description: "Player with Rocket and Brain wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"rocket.png", 1: "brain.png", k: -1, c: 0}
         },
         {
             name: "Star Gazing",
             filename: "starGaziing.png",
             dataURL: "",
             description: "Player with Eye and Cosmos wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"eye.png", 1: "cosmos.png", k: -1, c: 0}
         },
         {
             name: "Time is Money",
             filename: "timeMoney.png",
             dataURL: "",
             description: "Player with Time and Money wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"time.png", 1: "money.png", k: -1, c: 0}
         },
         {
             name: "Toast",
             filename: "toast.png",
             dataURL: "",
             description: "Player with Bread and Toaster wins",
-            type: "goal"
+            type: "goal",
+            condition: {0:"bread.png", 1: "toaster.png", k: -1, c: 0}
         },
     ]
 };
