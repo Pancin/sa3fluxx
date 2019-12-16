@@ -15,6 +15,7 @@ class Win extends React.Component {
     }
 
     render() {
+        console.log("ciaoooooo")
         return (
             <div className="bigWin">
                 {this.state.winner} WON!!

@@ -70,6 +70,7 @@ class Game {
   }
 
   isPlaying(name) {
+      console.log("current", this.players)
     return this.players[this.currentPlayer].name === name;
   }
 
@@ -169,6 +170,7 @@ class Game {
   }
 
   play(cardname, playerId = this.currentPlayer) {
+      console.log("player", playerId)
     //no newRules and Actions for the moment
     let player = this.players[playerId];
     if (this.cardType(cardname) == "keeper") {
@@ -198,6 +200,7 @@ class Game {
       cardname: this.getCard(cardname).name,
       nickname: player.name
     });
+    console.log("new turn", this.currentPlayer)
   }
 
   playRule(cardname) {

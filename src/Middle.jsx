@@ -37,7 +37,7 @@ class Middle extends React.Component {
 
 	static getDerivedStateFromProps(props, state) {
 		let newState = {...props};
-		newState.rules = props.rules.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
+		newState.rules = props.rules.map((card, i) => (<img key={i} src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
 		let counter = 0;
 		for (let i = 0; i < props.deck.length; i++) {
 			counter++;

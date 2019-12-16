@@ -31,8 +31,8 @@ class OtherPlayerRight extends React.Component {
 		let newState = {};
 		newState.protagonist = props.protagonist;
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')}/>));
-		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')}/>));
+		newState.creepers = props.player.creepers.map((card, i) => (<img key={i} src={require('' + card + '')}/>));
+		newState.keepers = props.player.keepers.map((card, i) => (<img key={i} src={require('' + card + '')}/>));
 		let counter = 0;
 		for (let i = 0; i < props.player.hand.length; i++) {
 			counter++;

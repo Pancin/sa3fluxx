@@ -86,21 +86,33 @@ class Center extends React.Component {
 		// console.log(this.players);
 		changeTurn(this.getGameState);
 		onWin(this.getWinner);
+
+		this._isMounted = false;
+	}
+
+	componentDidMount() {
+
+		this._isMounted = true;
+	}
+
+	componentWillUnmount() {
+
+		this._isMounted = false;
 	}
 
 	managePlayers = () => {
-		this.state.players.forEach((player, index) => {
+		 this.state.players.forEach((player, index) => {
 			if (player.name === this.state.nickname) {
-				this.setState({
+				this._isMounted && this.setState({
 					player: this.state.players[index],
 					playerNumber: index
 				}, () => {
 					if (this.state.players.length == 2) {
-						this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], 
+						this._isMounted && this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], 
 							this.state.nullPlayer, this.state.nullPlayer]});
 					}
 					else if (this.state.players.length == 3) {
-						this.setState({
+						this._isMounted && this.setState({
 							otherPlayers: [
 								this.state.players[(this.state.playerNumber + 1) % 3], 
 								this.state.players[(this.state.playerNumber + 2) % 3],
@@ -109,7 +121,7 @@ class Center extends React.Component {
 						});
 					}
 					else if (this.state.players.length == 4) {
-						this.setState({
+						this._isMounted && this.setState({
 							otherPlayers: [
 								this.state.players[(this.state.playerNumber + 1) % 4], 
 								this.state.players[(this.state.playerNumber + 2) % 4],
@@ -125,7 +137,7 @@ class Center extends React.Component {
 	getGameState = async () => {
 		try {
 			const { data } = await Axios.get('/gamestate');
-			this.setState({
+			this._isMounted && this.setState({
 					deck: data.deck,
 					discard: data.discard,
 					players: data.players,

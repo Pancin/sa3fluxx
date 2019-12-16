@@ -35,7 +35,8 @@ let sendJSON = (res, status, obj) => {
 
 function buildCardURI(cardname) {
     // console.log(cardname)
-    return './' + path.join('./media/deck', Game.cardType(cardname) + 's', cardname);
+    
+    return './' + path.join('media/deck', Game.cardType(cardname) + 's', cardname);
 }
 // console.log(buildCardURI('noGoal.png'));
 
@@ -135,6 +136,9 @@ router.post('/selectedHandCard', (req, res) => {
     // selectedCard -> se lo è, chiamare la funzione Play con selectedCard
     // console.log("Entered selected hand card");
     let cardname = path.basename(req.body.selectedCard);
+    console.log(req.body.player)
+    if (!Game.isPlaying(req.body.player)) console.log("ciaone");
+    if (!Game.containsCard(cardname, Game.getPlayer(req.body.player).hand)) console.log("ciaone potente");
     if(!Game.isPlaying(req.body.player) || !Game.containsCard(cardname, Game.getPlayer(req.body.player).hand)) res.sendStatus(403);
     else {
         Game.play(cardname);
