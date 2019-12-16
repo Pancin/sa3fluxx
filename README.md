@@ -8,3 +8,6 @@ active:
 - Alexandra Willi
 - Aron Dalle Pezze
 - Nicolò Panciera
+
+dead:
+-Nicolò Panciera
