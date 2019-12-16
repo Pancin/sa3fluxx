@@ -147,11 +147,12 @@ router.get('/win', (req, res) => {
     console.log(Game.winner);
     if (Game.winner) sendJSON(res,200,{winner:Game.winner});
     else res.sendStatus(403);
-})
+});
 
-router.post('/salvaci', (req,res) => {
-    Game.winner = 'ciao';
-    res.sendStatus(200);
-})
+// router.post('/salvaci', (req,res) => {
+//     Game.winner = 'ciao';
+//     res.sendStatus(200);
+//     eventBus.emit("win", Game.winner);
+// });
 
 module.exports = router;

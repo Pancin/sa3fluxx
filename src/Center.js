@@ -83,7 +83,7 @@ class Center extends React.Component {
 			change: false,
 		}
 		this.getGameState();
-		console.log(this.players);
+		// console.log(this.players);
 		changeTurn(this.getGameState);
 		onWin(this.getWinner);
 	}
@@ -145,7 +145,9 @@ class Center extends React.Component {
 	getWinner = async () => {
 		try {
 			const { data } = await Axios.get('/win');
-			console.log(data);
+			console.log("getWinner");
+			console.log("data")
+			console.log(data)
 			this.props.toWinner(data.winner);
 		}
 		catch(err) {

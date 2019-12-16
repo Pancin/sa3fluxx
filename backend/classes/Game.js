@@ -351,7 +351,7 @@ class Game {
 
   //returns winning player name
   checkWin() {
-    console.log("silver="+this.silverLining)
+    // console.log("silver="+this.silverLining)
 
     let goalname = this.goal;
     let winner;
@@ -372,7 +372,7 @@ class Game {
           this.containsCard(winCondition[1], player.keepers) &&
           (player.creepers.length === winCondition["c"] || this.silverLining)
         ) {
-            console.log("inside")
+            // console.log("inside")
           winner = player.name;
         }
       });
@@ -383,13 +383,13 @@ class Game {
           (player.creepers.length === winCondition["c"] || this.silverLining) &&
           player.keepers.length === 1
         ) {
-            console.log("inside")
+            // console.log("inside")
           winner = player.name;
         }
       });
     }
     if (winner) {
-        console.log("win")
+        // console.log("win")
       eventBus.emit("win", winner);
       this.winner = winner;
       return winner;

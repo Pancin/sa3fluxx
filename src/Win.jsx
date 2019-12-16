@@ -9,7 +9,8 @@ class Win extends React.Component {
         this.state = {
             winner: props.winner,
         }
-        console.log(props)
+        console.log("qui")
+        console.log(props);
         //
     }
 

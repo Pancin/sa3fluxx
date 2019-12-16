@@ -62,7 +62,7 @@ class App extends React.Component {
                     this.state.toWait ? <Redirect to='/wait' /> : <React.Fragment /> //if true, redirect, else return a void fragment
                 }
                 {
-                    this.state.toWin ? <Redirect to='/winner' /> : <React.Fragment /> //if true, redirect, else return a void fragment
+                    this.state.toWinner ? <Redirect to='/winner' /> : <React.Fragment /> //if true, redirect, else return a void fragment
                 }
                 <div>
                     <Switch>

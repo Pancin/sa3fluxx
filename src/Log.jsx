@@ -11,16 +11,26 @@ class Log extends React.Component {
 		this.state = {
 			log: [],
 		}
+		this._isMounted = false;
+ 		this.socket = openSocket('http://localhost:3002');
+        this.socket.on('turn', this.getLog);
+	}
+
+	componentDidMount() {
+		this._isMounted = true;
 		this.getLog();
 		changeTurn(this.getLog);
-		this.socket = openSocket('http://localhost:3002');
-		this.socket.on('turn', this.getLog);
+		        
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	getLog = async () => {
 		try {
 			const { data } = await Axios.get('/log');
-			this.setState({log: data.log.map(log => (<div>{log.nickname} played {log.cardname}</div>))});
+			this._isMounted && this.setState({log: data.log});
         } 
         catch(err) {
 			console.log(err);
@@ -30,7 +40,7 @@ class Log extends React.Component {
 	render() {
 		return (
 			<div className="actualLog">
-				{this.state.log}
+			{this.state.log.map((log, i) => (<div key={i}>{log.nickname} played {log.cardname}</div>))}
       		</div>
 		);
 	}
