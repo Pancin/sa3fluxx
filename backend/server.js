@@ -22,7 +22,11 @@ wss.on("connection", connection => {
 
 io.on("connection", (socket) => {
   socket.on('turn', (event) => {
-    console.log(event);
+    console.log("played card");
+    socket.emit.broadcast("turn", event);
+  });
+  socket.on('game.start', (event) => {
+    socket.emit.broadcast("game.start", event);
   });
 });
 
@@ -31,7 +35,15 @@ io.listen(3002);
 const eventBus = require('./pubsub');
 
 eventBus.on('turn', (event) => {
+  console.log("event bus");
   io.emit('turn', event);
+});
+eventBus.on('game.start', (event) => {
+  console.log("ciaone");
+  io.emit('game.start', event);
+});
+eventBus.on('win', (event) => {
+  io.emit('win', event);
 });
 
 

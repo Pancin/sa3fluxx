@@ -27,17 +27,17 @@ class OtherPlayerRight extends React.Component {
         }
 	}
 	
-	componentDidUpdate(oldProps) {
-		this.state.creepers = this.state.creepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
-		this.state.keepers = this.state.keepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
-	}
+	// componentDidUpdate(oldProps) {
+	// 	this.state.creepers = this.state.creepers
+	// 	this.state.keepers = this.state.keepers
+	// }
 
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
 		newState.protagonist = props.protagonist;
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers;
-		newState.keepers = props.player.keepers;
+		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')}/>));
+		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')}/>));
 		let counter = 0;
 		for (let i = 0; i < props.player.hand.length; i++) {
 			counter++;

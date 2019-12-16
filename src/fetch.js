@@ -9,13 +9,13 @@
  * @returns {Promise} which receives the HTTP response.
  */
 function doFetchRequest(method, url, headers, body) {
-    if (method != "POST" && method != "PUT" && method != "PATCH" && method != "GET" && method != "DELETE" && method != "OPTIONS" && method != "HEAD") {
+    if (method !== "POST" && method !== "PUT" && method !== "PATCH" && method !== "GET" && method !== "DELETE" && method !== "OPTIONS" && method !== "HEAD") {
         throw Error("invalid method");
     }
-    else if ((method == "POST" || method == "PUT" || method == "PATCH") && typeof (body) != "string") {
+    else if ((method === "POST" || method === "PUT" || method === "PATCH") && typeof (body) !== "string") {
         throw Error("body must be a string");
     }
-    else if ((method == "GET" || method == "DELETE" || method == "OPTIONS" || method == "HEAD") && body != undefined) {
+    else if ((method === "GET" || method === "DELETE" || method === "OPTIONS" || method === "HEAD") && body !== undefined) {
         throw Error("body must be undefined");
     }
     return fetch(url, { method: method, headers: headers, body: body });
@@ -33,13 +33,13 @@ function doJSONRequest(method, url, headers, body) {
     if ((headers["Accept"] && headers["Accept"] !== 'application/json') || (headers["Content-Type"] && headers["Content-Type"] !== 'application/json')) {
         throw Error("invalid headers");
     }
-    else if ((method == "GET" || method == "OPTIONS" || method == "HEAD" || method == "DELETE") && body != undefined) {
+    else if ((method === "GET" || method === "OPTIONS" || method === "HEAD" || method === "DELETE") && body !== undefined) {
         throw Error("body must be undefined");
     }
-    else if ((method == "POST" || method == "PUT" || method == "PATCH") && typeof(body) != "object") {
+    else if ((method === "POST" || method === "PUT" || method === "PATCH") && typeof(body) !== "object") {
         throw Error("body must be an object");
     }
-    else if ((method == "POST" || method == "PUT" || method == "PATCH") && typeof(body) == "object") {
+    else if ((method === "POST" || method === "PUT" || method === "PATCH") && typeof(body) === "object") {
         headers["Content-Type"] = "application/json";
         // try {
         //     body = JSON.stringify(body);    

@@ -3,9 +3,9 @@
 
 const express = require('express');
 const router = express.Router();
-const eventBus = require('../../emitter');
 const path = require('path');
 const Game = require('../../classes/Game');
+const eventBus = require('../../pubsub');
 
 const testplayer1 = {
     name: 'Sigisgulfo',
@@ -98,8 +98,9 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/start', (req, res) => {
-    if (!Game.is) {
-        Game.startPlay();
+    if (Game.getPlayer(req.body.nickname)) {
+        if (!Game.is) Game.startPlay();
+        eventBus.emit("game.start", Game.is);
         sendJSON(res, 200, { is: Game.is });
     }
     else {
@@ -121,6 +122,7 @@ router.post('/selectedHandCard', (req, res) => {
     else {
         Game.play(cardname);
         res.sendStatus(200);
+
     }
 });
 

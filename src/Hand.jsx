@@ -29,7 +29,7 @@ class Hand extends React.Component {
 	static getDerivedStateFromProps(props, state) {
 		return {
 			player: props.player,
-			hand: props.hand.map(card => (<img src={require('' + card + '')} onClick={() => state.onClick(card)}/>)),
+			hand: props.hand.map((card, i) => (<img key={i} src={require('' + card + '')} onClick={() => state.onClick(card)}/>)),
 		};
 	}
 

@@ -4,7 +4,7 @@ class DisplayConversation extends Component {
     displayMessage = () => {
         console.log(this.props.messages);
 
-        return this.props.messages.map(message => <div>{message.username}: {message.message}</div>)
+        return this.props.messages.map((message, i) => <div key={i}>{message.username}: {message.message}</div>)
     }
   render() {
     return (

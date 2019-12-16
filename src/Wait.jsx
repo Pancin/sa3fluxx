@@ -1,20 +1,26 @@
 import React from 'react';
 import './style/connect.css';
 import Axios from "./Axios";
+import { startGame } from "./utils";
 
 class Wait extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            nickname: props.nickname,
+            nickname: props.nickname
         }
+        startGame(() => { this.props.changeNicknameStart(this.state.nickname); }); 
+        
     }
 
     onConnect = async (event) => {
         try {
             event.preventDefault(); //so that it doesn't refresh
-            const { data } = await Axios.post('/start');
+            const { data } = await Axios.post('/start',
+            {
+                nickname: this.state.nickname,
+            });
             if (data.is) {
                 this.props.changeNicknameStart(this.state.nickname);
             }

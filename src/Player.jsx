@@ -30,9 +30,13 @@ class Player extends React.Component {
 	static getDerivedStateFromProps(props, state) {
 		let newState = {};
 		newState.name = props.player.name;
-		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
-		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')} onClick={() => this.onClick(card)}/>));
-		newState.cardsN = props.player.hand.map((card, index) => index + 1);
+		newState.creepers = props.player.creepers.map(card => (<img src={require('' + card + '')}/>));
+		newState.keepers = props.player.keepers.map(card => (<img src={require('' + card + '')}/>));
+		let counter = 0;
+		for (let i = 0; i < props.player.hand.length; i++) {
+			counter++;
+		}
+		newState.cardsN = counter;
 		newState.playsLeft = props.playsLeft;
 		return newState;
 	}
@@ -45,7 +49,7 @@ class Player extends React.Component {
 				<div id="bottomCC"> 
 					<div id="bottomName">{name}</div>
 					<div id="bottomCreepers">{creepers}</div> 
-					<div id="playsLeft">Plays left: {this.state.playsLeft}</div>
+					<div id="playsLeft">{this.props.currentPlayer.name === name ? `Plays left: ${this.state.playsLeft}` : 'Not Your Turn'}</div>
 				</div>
 			</div>
 		);

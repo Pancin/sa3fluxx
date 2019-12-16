@@ -1,4 +1,5 @@
-const fullDeck = require('../deck.js');
+// const fullDeck = require('../deck.js');
+const fullDeck = require('../lastDeck.js');
 const Player = require("./Player");
 const eventBus = require('../pubsub');
 
@@ -27,13 +28,10 @@ class Game {
         this.getCard = this.getCard.bind(this);
     }
 
-    is() {
-        return this.is;
-    }
-
     init() {
         this.deck = [];
-        fullDeck.forEach(card => {
+        // console.log(fullDeck)
+        fullDeck.cards.forEach(card => {
             this.deck.push(card.filename);
         });
     }
@@ -86,7 +84,7 @@ class Game {
             filename:'error.png',
             type:'error'
         };
-        fullDeck.forEach(card => {
+        fullDeck.cards.forEach(card => {
             // console.log(cardname);
             // console.log(card.filename);
             // console.log(card.type);
@@ -127,21 +125,23 @@ class Game {
     drawCard(n = 1, playerId = this.currentPlayer) {
         // console.log(this.players);
         // console.log(this.currentPlayer);
+        // console.log(playerId)
+        // console.log(this)
         let targetPlayer = this.players[playerId];
         // console.log(targetPlayer);
         for (let i = 0; i < n; ++i) {
             let card = this.cardFromDeck();
             // console.log('drawCard()')
             // console.log(card);
-            while (this.cardType(card) == 'creeper') {
-                targetPlayer.creepers.push(card);
-                card = this.cardFromDeck();
-            }
+            // while (this.cardType(card) == 'creeper') {
+            //     targetPlayer.creepers.push(card);
+            //     card = this.cardFromDeck();
+            // }
             targetPlayer.hand.push(card);
         }
     }
 
-    discard(cardname) {
+    discardCard(cardname) {
         this.discard.push(cardname);
     }
 
@@ -149,7 +149,7 @@ class Game {
         let player = this.players[playerId];
         let handLength = player.hand.length;
         if (cardname == "all") {
-            player.hand.forEach(card => this.discard(card));
+            player.hand.forEach(card => this.discardCard(card));
             player.hand = [];
         }
         else {
@@ -164,7 +164,7 @@ class Game {
 
     removeRuleBySubType(cardname) {
         this.rules.forEach(rulename => {
-            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discard(this.rules.splice(this.rules.indexOf(rulename), 1)[0]);
+            if (this.cardSubType(rulename) == this.cardSubType(cardname)) this.discardCard(this.rules.splice(this.rules.indexOf(rulename), 1)[0]);
         });
     }
 
@@ -174,7 +174,7 @@ class Game {
             console.log("Entered Keepers");
             this.removeCardFromPlayer(cardname, playerId);
             if (player.keepers.length === 9) {
-                this.discard(cardname);
+                this.discardCard(cardname);
             }
             else {
                 player.keepers.push(cardname);
@@ -323,7 +323,7 @@ class Game {
             this.silverLining = false;
         }
 
-        this.discard(cardname);
+        this.discardCard(cardname);
     }
 
     nextPlay() {
@@ -342,7 +342,9 @@ class Game {
     nextTurn() {
         this.played = 0;
         this.playLeft = this.maxPlay;
-        (++this.currentPlayer) % this.players.length;
+        console.log(this.players)
+        this.currentPlayer++
+        this.currentPlayer = (this.currentPlayer) % this.players.length;
         this.beginTurn();
     }
 
@@ -351,21 +353,19 @@ class Game {
             this.drawCard(3);
         }
         this.drawCard(this.draw);
-
-        // if (this.firstRandom) {
-        //     this.play();
-        // }
     }
 
     //returns winning player name
-    checkWin(goalname) {
-        console.log("Check win");
+    checkWin() {
+        let goalname = Game.goal;
         let winner;
         let winCondition = this.getCard(goalname).condition;
+        if (!winCondition)
+            return null;
         if (winCondition['k'] === -1) {
             this.players.forEach(player => {
-                console.log(player);
-                console.log(player.keepers);
+                // console.log(player);
+                // console.log(player.keepers);
                 if (this.containsCard(winCondition[0], player.keepers) &&
                     this.containsCard(winCondition[1], player.keepers) &&
                     (player.creepers.length === winCondition['c'] || this.silverLining)) 
@@ -380,6 +380,8 @@ class Game {
                     winner = player.name;
             });
         }
+        console.log('WINNER')
+        eventBus.emit('win');
         return winner;
     }
 }

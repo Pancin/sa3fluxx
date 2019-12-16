@@ -4,6 +4,7 @@ import Hand from './Hand';
 import "./style/game.css";
 import Axios from "./Axios";
 import { changeTurn } from "./utils";
+import openSocket from 'socket.io-client';
 
 class Center extends React.Component {
 
@@ -84,62 +85,42 @@ class Center extends React.Component {
 		this.getGameState();
 		console.log(this.players);
 		changeTurn(this.getGameState);
+		this.socket = openSocket('http://localhost:3002');
+		this.socket.on('action', this.getGameState)
 	}
 
-	// changeZoomCard = function (card) {
-	// 	this.setState({cardToZoom: card});
-	// }
-
 	managePlayers = () => {
-		if (this.state.players[0].name == this.state.nickname) {
-			this.setState({player: this.state.players[0]});
-			this.setState({playerNumber: 0});
-		}
-		else if (this.state.players[1].name == this.state.nickname) {
-			this.setState({player: this.state.players[1]});
-			this.setState({playerNumber: 1});
-		}
-		else if (this.state.players[2].name == this.state.nickname) {
-			this.setState({player: this.state.players[2]});
-			this.setState({playerNumber: 2});
-		}
-		else if (this.state.players[3].name == this.state.nickname) {
-			this.setState({player: this.state.players[3]});
-			this.setState({playerNumber: 3});
-		}
-
-		if (this.state.players.length == 2) {
-			this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], this.state.nullPlayer, this.state.nullPlayer]});
-		}
-		else if (this.state.players.length == 3) {
-			if (this.state.playerNumber == 0){
-				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.nullPlayer]});
+		this.state.players.forEach((player, index) => {
+			if (player.name === this.state.nickname) {
+				this.setState({
+					player: this.state.players[index],
+					playerNumber: index
+				}, () => {
+					if (this.state.players.length == 2) {
+						this.setState({otherPlayers: [this.state.players[1-this.state.playerNumber], 
+							this.state.nullPlayer, this.state.nullPlayer]});
+					}
+					else if (this.state.players.length == 3) {
+						this.setState({
+							otherPlayers: [
+								this.state.players[(this.state.playerNumber + 1) % 3], 
+								this.state.players[(this.state.playerNumber + 2) % 3],
+								this.state.nullPlayer
+							]
+						});
+					}
+					else if (this.state.players.length == 4) {
+						this.setState({
+							otherPlayers: [
+								this.state.players[(this.state.playerNumber + 1) % 4], 
+								this.state.players[(this.state.playerNumber + 2) % 4],
+								this.state.players[(this.state.playerNumber + 3) % 4]
+							]
+						});
+					}
+				});
 			}
-			else if (this.state.playerNumber == 1){
-				this.setState({otherPlayers: [this.state.players[0], this.state.players[2], this.state.nullPlayer]});
-			}
-			else if (this.state.playerNumber == 2){
-				this.setState({otherPlayers: [this.state.players[0], this.state.players[1], this.state.nullPlayer]});
-			}
-		}
-		else if (this.state.players.length == 4) {
-			if (this.state.playerNumber == 0){
-				this.setState({otherPlayers: [this.state.players[1], this.state.players[2], this.state.players[3]]});
-			}
-			else if (this.state.playerNumber == 1){
-				this.setState({otherPlayers: [this.state.players[2], this.state.players[3], this.state.players[0]]});
-			}
-			else if (this.state.playerNumber == 2){
-				this.setState({otherPlayers: [this.state.players[3], this.state.players[0], this.state.players[1]]});
-			}
-			else if (this.state.playerNumber == 3){
-				this.setState({otherPlayers: [this.state.players[0], this.state.players[1], this.state.players[2]]});
-			}
-		}
-
-		let newPlayer = this.state.player;
-		newPlayer.playsLeft = this.state.playsLeft;
-		this.setState(newPlayer);
+		})
 	}
 
 	getGameState = async () => {

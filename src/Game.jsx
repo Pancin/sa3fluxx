@@ -17,7 +17,8 @@ class Game extends React.Component {
 				props.otherPlayers[2], //left
 			],
 			gameState: props.gameState,
-		}
+		} 
+
 	}
 
 	static getDerivedStateFromProps(props, state) {
@@ -54,6 +55,7 @@ class Game extends React.Component {
 					<Player
 						player={this.state.player}
 						playsLeft={this.state.gameState.playsLeft}
+						currentPlayer={this.state.gameState.currentPlayer}
 					/>
 				</div>
 				<OtherPlayerRight
