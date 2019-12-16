@@ -200,6 +200,10 @@ class Game {
       cardname: this.getCard(cardname).name,
       nickname: player.name
     });
+    console.log(this.log)
+    if (this.log.length === 11) {
+      this.log = this.log.slice(-10);
+    }
     console.log("new turn", this.currentPlayer)
   }
 
